@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>UTT-v2.0 旗艦：坦克大戰 (Iron Heart Remix)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+</head>
+<body class="theme-steel">
+    <div id="game-container">
+        <header class="glass-header">
+            <div class="header-left">
+                <h1 class="game-title">🚜 鋼鐵雄心 <span>IRON HEART REMIX</span></h1>
+            </div>
+            <div class="header-stats">
+                <div class="stat"><span class="label">生命</span><span id="p-lives">3</span></div>
+                <div class="stat"><span class="label">敵方</span><span id="e-count">20</span></div>
+                <div class="stat"><span class="label">分數</span><span id="score">00000</span></div>
+            </div>
+            <div class="header-actions">
+                <button id="auto-btn" class="mini-btn tertiary">🤖 自動導航 (OFF)</button>
+                <button id="restart-btn" class="mini-btn">🔄 重開局</button>
+            </div>
+        </header>
+
+        <main id="battlefield-area">
+            <canvas id="gameCanvas"></canvas>
+            
+            <div id="game-overlay" class="overlay active">
+                <div class="overlay-card" id="start-view">
+                    <h2 class="title">鋼鐵意志</h2>
+                    <p class="desc">守護您的雄鷹基地，摧毀所有入侵的鐵騎。</p>
+                    <button id="start-game-btn" class="start-btn">全面開火</button>
+                </div>
+                <div class="overlay-card" id="end-view" style="display:none">
+                    <h2 class="title" style="color:var(--accent-fire)">任務失敗</h2>
+                    <p class="desc">基地已陷落，部隊正在重組...</p>
+                    <button id="retry-btn" class="start-btn" style="background:#444; color:#fff">重整軍備</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="glass-footer">
+            <p>FLAGSHIP REMASTERED | UTT-v2.0 INDUSTRIAL GRADE | COMMANDER PATRICIA HSU</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/audio.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/tank.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

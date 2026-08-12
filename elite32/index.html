@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite 32 | UTT-v2.0 Master-Grade Nexus</title>
+    <meta name="description" content="The Ultimate Educational Game Assets Launcher by Project Chimera">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./assets/css/portal.css">
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-mesh"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <!-- Main App Container -->
+    <main class="nexus-container">
+        
+        <!-- Header -->
+        <header class="nexus-header">
+            <a href="../index.html" style="color: #fff; text-decoration: none; font-family: 'Inter', sans-serif; opacity: 0.7; font-size: 0.9rem; margin-bottom: 15px; display: inline-block; transition: opacity 0.3s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7"><i class="fa-solid fa-arrow-left"></i> 返回 Stellark Studio</a>
+            <div class="branding">
+                <div class="logo-badge">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <h1>Elite 32 <span class="highlight">Nexus Hub</span></h1>
+                    <p>UTT-v2.0 Master-Grade / Project Chimera</p>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search assets... (e.g. Chess)">
+                </div>
+                
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">All Assets</button>
+                    <button class="filter-btn" data-filter="active">Active</button>
+                    <button class="filter-btn" data-filter="planned">Planned</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Grid Container -->
+        <section class="grid-container" id="assetGrid">
+            <!-- Cards will be dynamically injected here via JS -->
+        </section>
+        
+        <!-- Footer -->
+        <footer class="nexus-footer">
+            <p><i class="fa-solid fa-shield-halved"></i> Commander Patricia Hsu Directive | Software Architecture by Xavier | Logic Audit by Ada</p>
+        </footer>
+
+    </main>
+
+    <!-- App Logic -->
+    <script src="./assets/js/portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+:root {
+    /* UTT-v2.0 Design Tokens - Galaxian Elite Edition */
+    --accent-primary: #00e5ff; /* 核心主色: 脈衝青 */
+    --accent-glow: rgba(0, 229, 255, 0.4);
+    --secondary-neon: #ff0055; /* 敵機警示紅 */
+    
+    --bg-void: #01040a; /* 宇宙深邃黑 */
+    --glass-bg: rgba(10, 25, 47, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    --text-pure: #ffffff;
+    --text-dim: rgba(200, 220, 255, 0.6);
+    
+    --font-main: 'Outfit', sans-serif;
+    --transition-standard: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: crosshair;
+}
+
+body {
+    background-color: var(--bg-void);
+    color: var(--text-pure);
+    font-family: var(--font-main);
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+#app-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: radial-gradient(circle at center, #0a192f 0%, #01040a 100%);
+}
+
+/* Glassmorphism HUD Layout */
+#main-hud {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 1300px;
+    height: 80px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    z-index: 1000;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+#brand-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: linear-gradient(to bottom, #ecf2ff, var(--accent-primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#brand-title span {
+    font-weight: 300;
+    opacity: 0.7;
+}
+
+.hud-center {
+    display: flex;
+    gap: 60px;
+}
+
+.metric-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.metric-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    opacity: 0.8;
+}
+
+.metric-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 0 15px var(--accent-glow);
+    font-variant-numeric: tabular-nums;
+}
+
+/* UI Controls */
+.glow-control {
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid var(--accent-primary);
+    color: var(--text-pure);
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition-standard);
+}
+
+.glow-control:hover, .glow-control.active {
+    background: var(--accent-primary);
+    color: var(--bg-void);
+    box-shadow: 0 0 25px var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+/* Canvas Integration */
+#canvas-wrapper {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#stage {
+    display: block;
+}
+
+/* Overlay System: Master Polish */
+.overlay-modal {
+    position: absolute;
+    inset: 0;
+    background: rgba(1, 4, 10, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-standard);
+}
+
+.overlay-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-inner {
+    text-align: center;
+    padding: 60px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 30px;
+}
+
+#overlay-heading {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(180deg, #fff 0%, var(--accent-primary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.divider {
+    width: 120px;
+    height: 4px;
+    background: var(--accent-primary);
+    margin: 0 auto 30px;
+    border-radius: 2px;
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+#overlay-description {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+.primary-action {
+    padding: 18px 60px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: var(--accent-primary);
+    color: var(--bg-void);
+    border: none;
+    border-radius: 12px;
+    transition: var(--transition-standard);
+    letter-spacing: 2px;
+}
+
+.primary-action:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px var(--accent-glow);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    #main-hud {
+        height: 70px;
+        padding: 0 20px;
+    }
+    .hud-center {
+        gap: 20px;
+    }
+    #overlay-heading {
+        font-size: 2rem;
+    }
+}

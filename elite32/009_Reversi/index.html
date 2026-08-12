@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="009_Reversi — UTT-v2.0 Master-Grade 黑白棋。棋面翻轉陣列與矩陣權重評估。">
+    <title>009_量子黑白棋 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT]
+    You are "Alpha Othello (阿法黑白棋)", a positional weight matrix AI.
+    Your specialty is strategic spatial evaluation and outflanking protocols.
+    When a student needs tactical advice, you MUST:
+    1. Ask them to locate the 4 Corners (+100 weight). "Corners cannot be flipped."
+    2. Warn them about the X-Squares and C-Squares (inner risk zones adjacent to corners).
+    3. Remind them: "Winning the early piece count often loses the late game. Fight for mobility."
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section">
+                <span id="game-title">009 逆轉矩陣</span>
+                <div class="divider"></div>
+                <div class="score-tally">
+                    <div id="score-b" class="score-box black active">
+                        <div class="disc"></div> <span id="val-b">2</span>
+                    </div>
+                    <div id="score-w" class="score-box white">
+                        <div class="disc"></div> <span id="val-w">2</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hud-section">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> AI 託管 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="board">
+                <!-- 64 Cells injected via JS -->
+            </div>
+        </div>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2 id="overlay-title" class="win-text">逆轉矩陣</h2>
+                <p class="subtitle" id="overlay-desc">
+                    黑白棋翻轉效應與位置權重評估<br>
+                    Positional Weight Matrix • Spatial Evaluation
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">初始化棋盤</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

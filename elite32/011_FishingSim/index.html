@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="011_FishingSim — UTT-v2.0 Master-Grade 釣魚大師。融合流體張力模擬與隨機機率捕獲系統的旗艦級釣魚體驗。">
+    <title>011_釣魚大師 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT — FOR AI COMPANION INITIALIZATION]
+    You are "Captain Tide (潮汐船長)", a weathered and wise fishing mentor AI.
+    Your specialty is marine biology, fluid dynamics, and fishing strategy.
+    When a student asks about fishing, you MUST:
+    1. Explain the behavior patterns of different fish species.
+    2. Describe how water temperature, depth, and current affect catches.
+    3. Teach line tension management and the physics of rod flex.
+    4. Always encourage: "耐心是釣魚最好的餌，觀察是最銳利的魚鉤！"
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <!-- Glassmorphism HUD -->
+        <header id="hud-bar">
+            <div class="hud-section hud-left">
+                <span id="game-title">011 釣魚大師</span>
+                <div class="divider"></div>
+                <nav class="metric-nav" aria-label="Fishing Statistics">
+                    <div class="metric-group" title="當前得分">
+                        <span class="metric-label">分數</span>
+                        <span id="score-val" class="metric-value">000000</span>
+                    </div>
+                    <div class="metric-group" title="捕獲總數">
+                        <span class="metric-label">捕獲</span>
+                        <span id="catch-count" class="metric-value">0</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="剩餘餌料">
+                        <span class="metric-label">餌料</span>
+                        <span id="bait-display" class="metric-value">10</span>
+                    </div>
+                    <div class="metric-group" title="最大魚獲">
+                        <span class="metric-label">最大</span>
+                        <span id="max-size" class="metric-value">--</span>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="hud-section hud-right">
+                <button id="collection-toggle" class="glow-control" style="border-color: var(--accent-tertiary); color: var(--accent-tertiary);">
+                    <span class="icon">📋</span> 圖鑑
+                </button>
+                <button id="bait-btn" class="glow-control" style="border-color: var(--accent-secondary); color: var(--accent-secondary);">
+                    <span class="icon">🪱</span> 補充餌料
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control" aria-label="Toggle Auto Fish">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Canvas -->
+        <div id="canvas-wrapper">
+            <canvas id="stage" aria-label="Fishing Simulation Stage"></canvas>
+
+            <!-- Tension Bar -->
+            <div id="tension-bar-wrap">
+                <div id="tension-label">🎣 線張力</div>
+                <div id="tension-bar-outer">
+                    <div id="tension-bar-fill"></div>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button id="action-btn">拋竿</button>
+
+            <!-- Fish Catch Info -->
+            <div id="catch-info">
+                <div class="fish-emoji" id="catch-emoji">🐟</div>
+                <div class="fish-name" id="catch-name">--</div>
+                <div class="fish-details" id="catch-details">--</div>
+                <div class="fish-rarity rarity-common" id="catch-rarity">普通</div>
+            </div>
+
+            <!-- Collection Panel -->
+            <div id="collection-panel">
+                <h4>🐠 魚類圖鑑</h4>
+                <div id="collection-list">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Ad Overlay -->
+        <div id="ad-overlay" class="overlay-modal">
+            <div class="overlay-inner" style="max-width:450px; border-color: var(--accent-secondary);">
+                <h3 style="color: var(--accent-secondary); margin-bottom:10px; letter-spacing:2px">📺 漁業贊助商</h3>
+                <div class="overlay-divider" style="background:var(--accent-secondary)"></div>
+                <div style="height:150px; background:rgba(255,255,255,0.05); border-radius:15px; display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:20px">
+                    <span style="font-size:3rem; margin-bottom:10px">🎣</span>
+                    <p style="opacity:0.6; font-size:0.85rem">加載漁業頻道中...</p>
+                </div>
+                <p id="ad-timer" style="font-size:1.5rem; font-weight:700; margin-bottom:20px">5 秒後關閉</p>
+                <p style="font-size:0.75rem; opacity:0.4">觀看廣告以獲得免費餌料。</p>
+            </div>
+        </div>
+
+        <!-- State Overlay -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>釣魚大師</h2>
+                <p class="subtitle">
+                    流體張力模擬與隨機機率捕獲<br>
+                    Cast • Reel • Collect
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">出海釣魚</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

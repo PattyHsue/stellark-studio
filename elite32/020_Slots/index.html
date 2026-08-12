@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>020_CYBER_SLOTS | UTT-v2.0 MASTER-GRADE</title>
+    <meta name="description" content="霓虹老虎機 旗艦版，展現 2026 賽博空間博弈美學。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Emerald Casino HUD -->
+        <header id="main-hud">
+            <div class="hud-section">
+                <h1 id="brand-title">CYBER <span>SLOTS</span></h1>
+            </div>
+            <div class="hud-center">
+                <div class="metric-group">
+                    <span class="metric-label">點數</span>
+                    <span id="credits-val" class="metric-value">10,000</span>
+                </div>
+                <div class="metric-group">
+                    <span class="metric-label">贏得</span>
+                    <span id="win-val" class="metric-value">0</span>
+                </div>
+            </div>
+            <div class="hud-right">
+                <button id="auto-pilot-toggle" class="glow-control">🤖 自動</button>
+            </div>
+        </header>
+
+        <main id="slot-machine">
+            <canvas id="stage"></canvas>
+            <div id="controls">
+                <button id="spin-btn" class="spin-action">啟動旋轉</button>
+            </div>
+        </main>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>NEON FORTUNE</h2>
+                <div class="divider"></div>
+                <p>啟動塞博核心，旋轉命運之輪。三位一體，贏得霓虹大獎。</p>
+                <button id="init-game-btn" class="primary-action">開始遊戲</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

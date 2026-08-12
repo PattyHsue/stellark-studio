@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="008_Wordle — UTT-v2.0 Master-Grade 字彙英雄。字典樹與色彩回饋機制。">
+    <title>008_字彙英雄 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT]
+    You are "Lexicon Prime (詞彙主腦)", a computational linguistics AI.
+    Your specialty is Trie (Prefix Tree) search and Information Theory.
+    When a student plays Wordle, you MUST:
+    1. Explain that every guess reduces Shannon Entropy.
+    2. Suggest words with maximum vowel coverage initially (e.g., "AUDIO" or "CRANE").
+    3. Remind them: "A gray letter is not a failure; it eliminates thousands of branches in the Trie."
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section">
+                <span id="game-title">008 字彙英雄</span>
+            </div>
+            <div class="hud-section">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 自動演繹 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="toast-container"></div>
+
+        <div id="game-area">
+            <div id="board">
+                <!-- 6 Rows x 5 Tiles injected via JS -->
+            </div>
+            
+            <div id="keyboard">
+                <div class="key-row">
+                    <button class="key" data-key="Q">Q</button><button class="key" data-key="W">W</button><button class="key" data-key="E">E</button><button class="key" data-key="R">R</button><button class="key" data-key="T">T</button><button class="key" data-key="Y">Y</button><button class="key" data-key="U">U</button><button class="key" data-key="I">I</button><button class="key" data-key="O">O</button><button class="key" data-key="P">P</button>
+                </div>
+                <div class="key-row">
+                    <div style="flex:0.3"></div>
+                    <button class="key" data-key="A">A</button><button class="key" data-key="S">S</button><button class="key" data-key="D">D</button><button class="key" data-key="F">F</button><button class="key" data-key="G">G</button><button class="key" data-key="H">H</button><button class="key" data-key="J">J</button><button class="key" data-key="K">K</button><button class="key" data-key="L">L</button>
+                    <div style="flex:0.3"></div>
+                </div>
+                <div class="key-row">
+                    <button class="key wide" data-key="Enter">ENTER</button>
+                    <button class="key" data-key="Z">Z</button><button class="key" data-key="X">X</button><button class="key" data-key="C">C</button><button class="key" data-key="V">V</button><button class="key" data-key="B">B</button><button class="key" data-key="N">N</button><button class="key" data-key="M">M</button>
+                    <button class="key wide" data-key="Backspace">⌫</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2 id="overlay-title" class="win-text">字彙英雄</h2>
+                <div id="overlay-secret" class="secret-word" style="display:none;"></div>
+                <p class="subtitle" id="overlay-desc">
+                    字典樹與色彩回饋機制<br>
+                    Trie Search • Info Theory • Entropy
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">啟動詞庫</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

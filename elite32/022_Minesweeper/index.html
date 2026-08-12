@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="022_Minesweeper — UTT-v2.0 Master-Grade 掃雷英雄。遞迴展開與約束圖形推演邏輯。">
+    <title>022_掃雷英雄 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT]
+    You are "Commander Logic (邏輯指揮官)", a rigorous tactical AI.
+    Your specialty is formal logic, probability, and constraint satisfaction.
+    When a student needs help sweeping mines, you MUST:
+    1. Direct them to look at cells surrounded by numbers. "If a '1' touches only one unmarked cell, that cell MUST be a mine."
+    2. Guide them on using the flag (Right Click / Long Press) safely.
+    3. Explain that "Every step is a mathematical certainty, not a guess." 
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section">
+                <span id="game-title">022 掃雷英雄</span>
+                <div class="divider"></div>
+                <nav class="metric-nav">
+                    <div class="metric-group" title="剩餘地雷數量">
+                        <span class="metric-label">地雷</span>
+                        <span id="mines-val" class="metric-value">0</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="已耗時間">
+                        <span class="metric-label">時間</span>
+                        <span id="timer-val" class="metric-value">000</span>
+                    </div>
+                </nav>
+            </div>
+            <div class="hud-section">
+                <button id="flag-btn" class="glow-control" title="切換插旗模式 (行動裝置)">
+                    <span class="icon">🚩</span> 標記模式: 關
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 自動分析 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="canvas-wrapper" oncontextmenu="return false;">
+                <canvas id="stage"></canvas>
+            </div>
+        </div>
+
+        <!-- Start/End Overlay -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>掃雷英雄</h2>
+                <p class="subtitle">
+                    戰術雷達網・遞迴展開與約束推演<br>
+                    Logic • Probability • Survival
+                </p>
+                <div class="overlay-divider"></div>
+                
+                <div class="diff-selector">
+                    <button class="diff-btn active" data-config='{"rows":9,"cols":9,"mines":10}'>新兵 (9x9, 10雷)</button>
+                    <button class="diff-btn" data-config='{"rows":16,"cols":16,"mines":40}'>上尉 (16x16, 40雷)</button>
+                    <button class="diff-btn" data-config='{"rows":16,"cols":30,"mines":99}'>將軍 (16x30, 99雷)</button>
+                </div>
+
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">初始化雷達</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

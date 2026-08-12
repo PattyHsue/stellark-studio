@@ -1,0 +1,152 @@
+/* ============================================================
+   013_MEMORY_MATCHING | 記憶翻牌 (神經突觸)
+   Theme: Neural Synapse Matrix
+   UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+   ============================================================ */
+
+:root {
+    --bg-deep: #0a0e17;
+    --bg-surface: #131a28;
+    --accent-primary: #05d9e8;
+    --accent-glow: #01ffc3;
+    --accent-error: #ff2a6d;
+    --accent-warning: #ffb800;
+    --glass-bg: rgba(19, 26, 40, 0.7);
+    --glass-border: rgba(5, 217, 232, 0.2);
+    --text-pure: #e2f1f8;
+    --text-muted: #8b9bb4;
+    --hud-h: 64px;
+    --font-main: 'Outfit', 'Noto Sans TC', sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+    --transition-fast: 0.2s ease;
+    --transition-card: 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    font-family: var(--font-main);
+    background: var(--bg-deep); color: var(--text-pure);
+    user-select: none; -webkit-user-select: none;
+}
+
+#app-container {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    background:
+        radial-gradient(ellipse at top center, rgba(5, 217, 232, 0.1), transparent 50%),
+        radial-gradient(ellipse at bottom left, rgba(255, 42, 109, 0.05), transparent 50%),
+        var(--bg-deep);
+}
+
+/* === HUD === */
+#hud-bar {
+    height: var(--hud-h); display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; background: var(--glass-bg); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border); z-index: 10; flex-shrink: 0;
+}
+.hud-section { display: flex; align-items: center; gap: 16px; }
+#game-title {
+    font-size: 0.95rem; font-weight: 800; letter-spacing: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.divider { width: 1px; height: 24px; background: var(--glass-border); margin: 0 8px; }
+.metric-nav { display: flex; gap: 20px; }
+.metric-group { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
+.metric-label { font-size: 0.5rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
+.metric-value { font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
+
+.glow-control {
+    background: transparent; border: 1px solid var(--accent-primary);
+    color: var(--accent-primary); padding: 8px 18px; border-radius: 30px;
+    font-family: var(--font-main); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 1px; cursor: pointer; transition: all var(--transition-fast);
+    display: flex; align-items: center; gap: 6px;
+}
+.glow-control:hover { background: rgba(5, 217, 232, 0.15); box-shadow: 0 0 15px rgba(5, 217, 232, 0.3); }
+.glow-control.active { background: var(--accent-primary); color: #000; box-shadow: 0 0 20px rgba(5, 217, 232, 0.5); }
+
+/* === GAME STAGE === */
+#game-area { flex: 1; position: relative; display: flex; justify-content: center; align-items: center; padding: 20px; overflow: hidden; }
+
+#card-grid {
+    display: grid; gap: 15px; perspective: 1000px;
+    /* CSS variables will be populated via JS for grid-template */
+}
+
+/* === CARD 3D FLIP ARCHITECTURE === */
+.memory-card {
+    position: relative; cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform var(--transition-card), box-shadow var(--transition-fast);
+    border-radius: var(--radius-md);
+}
+
+.memory-card:hover { box-shadow: 0 0 20px rgba(5, 217, 232, 0.2); }
+
+.memory-card.flipped { transform: rotateY(180deg); }
+.memory-card.matched { transform: rotateY(180deg) scale(0.95); pointer-events: none; }
+.memory-card.matched .card-back { background: var(--glass-bg); border-color: var(--accent-glow); opacity: 0.8; box-shadow: 0 0 15px rgba(1, 255, 195, 0.3); }
+
+.card-face {
+    position: absolute; width: 100%; height: 100%;
+    backface-visibility: hidden; border-radius: inherit; display: flex;
+    justify-content: center; align-items: center; font-size: 2.5rem;
+    border: 2px solid transparent;
+}
+
+/* Front is the "Hidden" side logically, because transform rotates 180 */
+.card-front {
+    background: linear-gradient(135deg, #131a28, #0a0e17);
+    border-color: rgba(5, 217, 232, 0.3);
+    /* Circuit pattern */
+    background-image: radial-gradient(rgba(5, 217, 232, 0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+.card-front::after { content: '🖧'; font-size: 1.5rem; opacity: 0.3; }
+
+/* Back is the "Revealed" side */
+.card-back {
+    background: #0ea5e9;
+    background: linear-gradient(135deg, rgba(5, 217, 232, 0.2), rgba(1, 255, 195, 0.1));
+    border-color: var(--accent-primary);
+    transform: rotateY(180deg);
+}
+
+/* === OVERLAYS === */
+.overlay-modal {
+    position: fixed; inset: 0; display: flex; justify-content: center; align-items: center;
+    background: rgba(10, 14, 23, 0.95); backdrop-filter: blur(20px);
+    z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+}
+.overlay-modal.active { opacity: 1; pointer-events: all; }
+
+.overlay-inner {
+    text-align: center; max-width: 480px; padding: 50px;
+    border: 1px solid var(--glass-border); border-radius: var(--radius-lg); background: var(--glass-bg);
+}
+.overlay-inner h2 {
+    font-size: 2.5rem; font-weight: 800; letter-spacing: 6px; margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.overlay-inner .subtitle { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+.overlay-divider { width: 60px; height: 3px; margin: 20px auto; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent); }
+
+.diff-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+.diff-btn {
+    background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted);
+    padding: 8px 16px; border-radius: 25px; font-family: var(--font-main); font-size: 0.8rem;
+    cursor: pointer; transition: all 0.2s;
+}
+.diff-btn.active { background: var(--accent-primary); border-color: var(--accent-primary); color: #000; box-shadow: 0 0 15px rgba(5, 217, 232, 0.4); }
+
+.overlay-btn {
+    padding: 16px 50px; font-family: var(--font-main); font-size: 1rem; font-weight: 700;
+    letter-spacing: 3px; color: #000; background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+    border: none; border-radius: 35px; cursor: pointer; transition: all 0.2s;
+}
+.overlay-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(5, 217, 232, 0.5); }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="016_BridgePro — UTT-v2.0 Master-Grade Bridge Engineering Simulation. Build, Test, and Optimize structural bridges with real physics.">
+    <title>016_BRIDGEPRO | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT — FOR AI COMPANION INITIALIZATION]
+    You are "Dr. Euler", a structural engineering mentor AI.
+    Your specialty is truss analysis, load distribution, and material science.
+    When a student asks about bridge design, you MUST:
+    1. Explain the physics of compression vs. tension members.
+    2. Use analogies from real-world bridges (Golden Gate, Millau Viaduct).
+    3. Guide them through the Euler-Bernoulli beam theory at a conceptual level.
+    4. Always encourage experimentation: "Add a diagonal brace and test again!"
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <!-- Glassmorphism HUD -->
+        <header id="hud-bar">
+            <div class="hud-section hud-left">
+                <span id="game-title">016 BRIDGEPRO</span>
+                <div class="divider"></div>
+                <nav class="metric-nav" aria-label="Game Statistics">
+                    <div class="metric-group" title="Engineering Score">
+                        <span class="metric-label">工程分數</span>
+                        <span id="score-val" class="metric-value">000000</span>
+                    </div>
+                    <div class="metric-group" title="Current Level">
+                        <span class="metric-label">關卡</span>
+                        <span id="level-display" class="metric-value">01</span>
+                    </div>
+                    <div class="metric-group" title="Budget Remaining">
+                        <span class="metric-label">預算</span>
+                        <span id="budget-display" class="metric-value" style="color:#30d08a">$5000</span>
+                    </div>
+                    <div class="metric-group" title="Bridge Stress">
+                        <span class="metric-label">應力</span>
+                        <div class="stress-bar" style="width:80px">
+                            <div id="stress-fill" class="stress-fill" style="width:0%"></div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="hud-section hud-right">
+                <button id="get-budget-btn" class="glow-control" style="border-color:#30d08a; color:#30d08a; margin-right:15px">
+                    <span class="icon">💰</span> 獲得
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control" aria-label="Toggle Auto Build">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Game Canvas -->
+        <main>
+            <canvas id="stage" aria-label="Bridge Engineering Stage"></canvas>
+        </main>
+
+        <!-- Build Mode Controls (Bottom Toolbar) -->
+        <div id="build-controls">
+            <button class="build-btn active" id="btn-beam" data-tool="beam">🔩 鋼樑</button>
+            <button class="build-btn" id="btn-road" data-tool="road">🛤️ 路面</button>
+            <button class="build-btn" id="btn-cable" data-tool="cable">🔗 纜繩</button>
+            <button class="build-btn danger" id="btn-delete" data-tool="delete">✕ 刪除</button>
+            <div class="divider"></div>
+            <button class="build-btn success" id="btn-test">▶ 測試</button>
+            <button class="build-btn" id="btn-reset">↺ 重置</button>
+        </div>
+
+        <!-- State Overlay (Non-blocking Cinematic UI) -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>BRIDGEPRO</h2>
+                <p class="subtitle">
+                    Structural Engineering Simulation<br>
+                    Design • Build • Stress Test
+                </p>
+                <div class="divider"></div>
+                <p class="subtitle" style="font-size:0.75rem; opacity:0.4; margin-bottom:20px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">開始工程</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="023_SpotDifference — UTT-v2.0 Master-Grade 找不同。雙畫布同步渲染與熱區檢測引擊。">
+    <title>023_鏡影迷蹤 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Noto+Sans+TC:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT — FOR AI COMPANION INITIALIZATION]
+    You are "Detective Lynx (幻象偵探)", a sharp-eyed visual logic AI.
+    Your specialty is pattern recognition, anomaly detection, and visual focus.
+    When a student needs help finding differences, you MUST:
+    1. Guide them to scan the screen in a systematic grid (Top-Left to Bottom-Right).
+    2. Prompt them to check color variations, missing elements, or shifted shapes.
+    3. Remind them that "illusion is just math interpreted differently."
+    4. Always encourage: "真相隱藏在微小的細節之中，保持敏銳！"
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <!-- HUD Bar -->
+        <header id="hud-bar">
+            <div class="hud-section hud-left">
+                <span id="game-title">023 鏡影迷蹤</span>
+                <div class="divider"></div>
+                <nav class="metric-nav">
+                    <div class="metric-group" title="已找到的不同處">
+                        <span class="metric-label">發現</span>
+                        <span id="found-val" class="metric-value">0/5</span>
+                    </div>
+                    <div class="metric-group" title="當前得分">
+                        <span class="metric-label">分數</span>
+                        <span id="score-val" class="metric-value">0</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="剩餘時間">
+                        <span class="metric-label">時間</span>
+                        <span id="timer-val" class="metric-value">60s</span>
+                    </div>
+                    <div class="metric-group" title="剩餘愛心">
+                        <span class="metric-label">生命</span>
+                        <span id="life-val" class="metric-value" style="color:var(--accent-primary)">❤️❤️❤️</span>
+                    </div>
+                </nav>
+            </div>
+            <div class="hud-section hud-right">
+                <button id="hint-btn" class="glow-control" style="border-color: var(--accent-tertiary); color: var(--accent-tertiary);">
+                    <span class="icon">🔍</span> 提示 (3)
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Game Area: Dual Canvas -->
+        <div id="game-area">
+            <!-- Left Canvas (Original) -->
+            <div class="canvas-wrapper">
+                <canvas id="stage-left" class="stage-canvas"></canvas>
+                <div id="flash-left" class="error-flash"></div>
+            </div>
+            
+            <!-- Right Canvas (Illusion) -->
+            <div class="canvas-wrapper" style="border-color:var(--accent-secondary);">
+                <canvas id="stage-right" class="stage-canvas"></canvas>
+                <div id="flash-right" class="error-flash"></div>
+            </div>
+        </div>
+
+        <!-- Start/End Overlay -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>鏡影迷蹤</h2>
+                <p class="subtitle">
+                    雙畫布同步渲染與幾何熱區檢測<br>
+                    Scan • Detect • Ascertain
+                </p>
+                <div class="overlay-divider"></div>
+                
+                <div id="difficulty-selector">
+                    <button class="diff-btn active" data-diff="easy">初級 (尋找 5 處)</button>
+                    <button class="diff-btn" data-diff="hard">幻象 (尋找 8 處)</button>
+                </div>
+
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">進入心靈畫布</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

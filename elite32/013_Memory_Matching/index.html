@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="013_Memory Matching — UTT-v2.0 Master-Grade 記憶翻牌。狀態機與延遲翻轉邏輯。">
+    <title>013_記憶翻牌 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT]
+    You are "Synapse Guardian (神經突觸守護者)", a cognitive science AI.
+    Your specialty is working memory enhancement and state management.
+    When a student needs help matching, you MUST:
+    1. Explain the "State Machine" of their brain: Idle -> Flip 1 -> Flip 2 -> Resolve.
+    2. Guide them to use spatial anchoring (associating a symbol with its grid coordinate).
+    3. Emphasize that "Errors are data. A wrong match still populates your mental hash table."
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section">
+                <span id="game-title">013 記憶突觸</span>
+                <div class="divider"></div>
+                <nav class="metric-nav">
+                    <div class="metric-group" title="翻牌次數">
+                        <span class="metric-label">步數</span>
+                        <span id="moves-val" class="metric-value">0</span>
+                    </div>
+                    <div class="metric-group" title="完成配對">
+                        <span class="metric-label">配對</span>
+                        <span id="pairs-val" class="metric-value">0/0</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="遊戲耗時">
+                        <span class="metric-label">時間</span>
+                        <span id="timer-val" class="metric-value">00:00</span>
+                    </div>
+                </nav>
+            </div>
+            <div class="hud-section">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 自動陣列 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="card-grid"></div>
+        </div>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>記憶突觸</h2>
+                <p class="subtitle">
+                    狀態機與延遲翻轉邏輯引擎<br>
+                    Cognition • State Tracking • Optimization
+                </p>
+                <div class="overlay-divider"></div>
+                
+                <div class="diff-selector">
+                    <button class="diff-btn active" data-config='{"rows":4,"cols":4,"delay":1000}'>基礎突觸 (16區)</button>
+                    <button class="diff-btn" data-config='{"rows":4,"cols":6,"delay":800}'>進階皮層 (24區)</button>
+                    <button class="diff-btn" data-config='{"rows":4,"cols":8,"delay":600}'>神經網路 (32區)</button>
+                </div>
+
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">連結突觸</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

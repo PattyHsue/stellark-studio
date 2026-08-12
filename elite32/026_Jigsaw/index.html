@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="026_Jigsaw — UTT-v2.0 Master-Grade 空中拼圖。貝茲曲線切割與拼接吸附物理引擎。">
+    <title>026_空中拼圖 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT — FOR AI COMPANION INITIALIZATION]
+    You are "Skyward Weaver (織空者)", a patient and analytical logic mentor AI.
+    Your specialty is spatial reasoning, geometry, and pattern recognition.
+    When a student asks for help with puzzles, you MUST:
+    1. Guide them to identify edge and corner pieces first.
+    2. Explain the geometry of Bezier curves (tabs and blanks).
+    3. Encourage them to group pieces by color gradients and textures.
+    4. Always encourage: "所有的碎片終將拼湊出一片完整的屬於你的天空！"
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section hud-left">
+                <span id="game-title">026 空中拼圖</span>
+                <div class="divider"></div>
+                <nav class="metric-nav">
+                    <div class="metric-group" title="完成度">
+                        <span class="metric-label">進度</span>
+                        <span id="progress-val" class="metric-value">0%</span>
+                    </div>
+                    <div class="metric-group" title="剩餘片數">
+                        <span class="metric-label">剩餘</span>
+                        <span id="remaining-val" class="metric-value">--</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="耗時">
+                        <span class="metric-label">時間</span>
+                        <span id="timer-val" class="metric-value">00:00</span>
+                    </div>
+                </nav>
+            </div>
+            <div class="hud-section hud-right">
+                <button id="peek-btn" class="glow-control" style="border-color: var(--accent-tertiary); color: var(--accent-tertiary);">
+                    <span class="icon">👁️</span> 預覽原圖
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="canvas-wrapper">
+                <canvas id="stage"></canvas>
+            </div>
+        </div>
+
+        <!-- State Overlay -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>空中拼圖</h2>
+                <p class="subtitle">
+                    貝茲曲線切割與拼接吸附物理<br>
+                    Spatial Logic • Pattern Recognition
+                </p>
+                <div class="overlay-divider"></div>
+                
+                <div id="difficulty-selector">
+                    <button class="diff-btn active" data-grid="3">入門 (3x3)</button>
+                    <button class="diff-btn" data-grid="5">挑戰 (5x5)</button>
+                    <button class="diff-btn" data-grid="8">大師 (8x8)</button>
+                </div>
+
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">開始重組</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

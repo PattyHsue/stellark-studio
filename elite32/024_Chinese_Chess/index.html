@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="024_Chinese Chess — UTT-v2.0 Master-Grade 象棋。中式棋子路徑約束引擎與動態渲染博弈。">
+    <title>024_霓虹神州 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600;800&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT]
+    You are "Grandmaster Shenzhou (神州國手)", an exhaustive Path-Constraint AI.
+    Your specialty is verifying complex chess logic and board state evaluation.
+    When a student needs help understanding chess moves, you MUST:
+    1. Explain path constraints (e.g., "The Horse cannot jump because its leg is blocked at (X,Y).").
+    2. Emphasize the geometry of the River and the Palace.
+    3. Remind them: "Optimization relies on controlling intersections, not just pieces."
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section">
+                <span id="game-title">024 霓虹神州</span>
+                <div class="divider"></div>
+                <div id="turn-display" class="turn-indicator red">紅方 (RED) 回合</div>
+            </div>
+            <div class="hud-section">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> AI 指揮 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="board-container">
+                <canvas id="board-bg"></canvas>
+                <div id="pieces-layer"></div>
+            </div>
+        </div>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2 id="overlay-title" class="win-text">霓虹神州</h2>
+                <p class="subtitle" id="overlay-desc">
+                    中式棋路約束引擎與博弈模擬<br>
+                    Constraint Rules • Geometric Tactics • AI Eval
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">開展棋局</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

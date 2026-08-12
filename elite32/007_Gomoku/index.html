@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="007_Gomoku — UTT-v2.0 Master-Grade 五子棋。模式識別引擎與防線權重模擬。">
+    <title>007_賽博水墨 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT]
+    You are "Sage Array (陣列智者)", a heuristic pattern recognition AI.
+    Your specialty is sequence detection (n-in-a-row) and threat escalation.
+    When a student needs tactical advice in Gomoku, you MUST:
+    1. Explain the severity levels: "An Open-3 is a latent threat. A Closed-4 requires immediate blocking."
+    2. Suggest building 'intersections' where two distinct Open-3 lines cross.
+    3. Remind them: "Defense is forced calculation; Offense is dictating the board's shape."
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section">
+                <span id="game-title">007 賽博水墨</span>
+                <div class="divider"></div>
+                <div id="turn-display" class="turn-indicator black-turn">⚫ 黑子 (BLACK) 行動</div>
+            </div>
+            <div class="hud-section">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> AI 推演 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="board-container">
+                <canvas id="board-bg"></canvas>
+                <div id="pieces-layer"></div>
+                <canvas id="win-layer"></canvas>
+            </div>
+        </div>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2 id="overlay-title">賽博水墨 五連珠</h2>
+                <p class="subtitle" id="overlay-desc">
+                    橫縱對角線狀模式識別與權重評估<br>
+                    Pattern Recognition • Heuristic Blocking • Evaluation Matrix
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">初始化矩陣</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

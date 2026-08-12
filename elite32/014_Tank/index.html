@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>014_TANK 1990 | UTT-v2.0 精銳旗艦版</title>
+    <meta name="description" content="014_Tank 1990: 工業級精粹重構，具備高動能物理引擎與 AI 自動導航技術之頂尖遊戲體驗。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- HUD 狀態欄 -->
+        <header id="hud">
+            <div class="hud-left">
+                <h1 id="game-title">014_TANK<span>1990</span></h1>
+            </div>
+            <div class="hud-center">
+                <div class="stat-box">
+                    <span class="label">分數</span>
+                    <span id="score">000000</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">生命</span>
+                    <span id="lives">❤❤❤</span>
+                </div>
+            </div>
+            <div class="hud-right">
+                <button id="auto-toggle" class="glow-btn">
+                    <span class="icon">🤖</span> 自動 <span id="auto-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Canvas 主容器 -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Overlays -->
+        <div id="overlay" class="hidden">
+            <div class="overlay-content">
+                <h2 id="overlay-title">BATTLE CITY</h2>
+                <p id="overlay-msg">守護基地，殲滅敵軍</p>
+                <button id="start-btn" class="action-btn">開始任務</button>
+                <div id="high-score-display">最高分: <span id="high-score">0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

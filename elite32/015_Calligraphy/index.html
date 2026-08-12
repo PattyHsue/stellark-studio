@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="015_Calligraphy — UTT-v2.0 Master-Grade Digital Brush Calligraphy. Pressure-sensitive brush strokes on virtual rice paper.">
+    <title>015_CALLIGRAPHY | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT — FOR AI COMPANION INITIALIZATION]
+    You are "Master Wang Xizhi (王羲之)", a legendary calligraphy mentor AI.
+    Your specialty is Chinese brush calligraphy technique and aesthetics.
+    When a student asks about calligraphy, you MUST:
+    1. Explain the 8 fundamental strokes (永字八法).
+    2. Guide brush angle, pressure, and speed for each stroke type.
+    3. Teach the qi (氣韻) — the rhythm and breath in each character.
+    4. Always encourage: "The brush is an extension of your heart."
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <!-- Glassmorphism HUD -->
+        <header id="hud-bar">
+            <div class="hud-section hud-left">
+                <span id="game-title">015 書法</span>
+                <div class="divider"></div>
+                <nav class="metric-nav" aria-label="Calligraphy Metrics">
+                    <div class="metric-group" title="當前得分">
+                        <span class="metric-label">分數</span>
+                        <span id="score-val" class="metric-value">000000</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="筆劃總數">
+                        <span class="metric-label">筆劃</span>
+                        <span id="strokes-display" class="metric-value">0</span>
+                    </div>
+                    <div class="metric-group" title="當前摹本">
+                        <span class="metric-label">字帖</span>
+                        <span id="char-display" class="metric-value" style="font-family:'Noto Serif TC',serif; font-size:1.3rem">永</span>
+                    </div>
+                    <div class="metric-group" title="剩餘墨量 (點擊補充)">
+                        <span class="metric-label">墨量</span>
+                        <span id="ink-display" class="metric-value">100%</span>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="hud-section hud-right">
+                <button id="clear-btn" class="glow-control" style="border-color:#1a5c38; color:#1a5c38; margin-right:15px">
+                    <span class="icon">🖌️</span> 清除
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control" aria-label="Toggle Auto Demo">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Game Canvas (Rice Paper) -->
+        <main>
+            <canvas id="stage" aria-label="Calligraphy Rice Paper Canvas"></canvas>
+        </main>
+
+        <!-- Character Selection Panel (Left) -->
+        <div id="char-panel">
+            <button class="char-btn active" data-char="永">永</button>
+            <button class="char-btn" data-char="人">人</button>
+            <button class="char-btn" data-char="大">大</button>
+            <button class="char-btn" data-char="山">山</button>
+            <button class="char-btn" data-char="水">水</button>
+            <button class="char-btn" data-char="月">月</button>
+            <button class="char-btn" data-char="日">日</button>
+            <button class="char-btn" data-char="風">風</button>
+            <button class="char-btn" data-char="雲">雲</button>
+            <button class="char-btn" data-char="龍">龍</button>
+        </div>
+
+        <!-- Brush Tool Panel (Bottom) -->
+        <div id="brush-panel">
+            <button class="brush-btn active" data-brush="regular" title="Regular Brush (中鋒)">
+                <span class="icon">🖌️</span> 中鋒
+            </button>
+            <button class="brush-btn" data-brush="thick" title="Thick Brush (粗筆)">
+                <span class="icon">🖊️</span> 粗筆
+            </button>
+            <button class="brush-btn" data-brush="thin" title="Thin Brush (細筆)">
+                <span class="icon">✏️</span> 細筆
+            </button>
+            <button class="brush-btn" data-brush="splash" title="Splash Ink (潑墨)">
+                <span class="icon">💧</span> 潑墨
+            </button>
+
+            <div class="ink-slider-wrap">
+                <label for="ink-density">INK DENSITY</label>
+                <input type="range" id="ink-density" min="10" max="100" value="80">
+                <div class="tool-btn-group">
+                    <button id="undo-btn" class="tool-btn" title="撤銷上一步">
+                        <span class="icon">↩️</span> 撤銷
+                    </button>
+                    <button id="save-btn" class="tool-btn" title="保存作品">
+                        <span class="icon">💾</span> 存檔
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- State Overlay -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>數位書法</h2>
+                <p class="subtitle">
+                    毛筆壓力感應與筆觸模擬<br>
+                    Pressure • Ink • Flow
+                </p>
+                <div class="overlay-divider"></div>
+                <span class="seal-stamp">墨韻</span>
+                <p class="subtitle" style="font-size:0.65rem; opacity:0.35; margin-top:16px; margin-bottom:16px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">蘸墨開始</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

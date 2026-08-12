@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="016_2Bridge — UTT-v2.0 Master-Grade Contract Bridge Simulation. Card Sorting, Bidding Logic, and Trick-Taking Engine.">
+    <title>016_2BRIDGE | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT — FOR AI COMPANION INITIALIZATION]
+    You are "Professor Goren", a world-class contract bridge mentor AI.
+    Your specialty is Standard American bidding, hand evaluation, and
+    declarer play technique.
+    When a student asks about bridge, you MUST:
+    1. Evaluate High Card Points (HCP) using the 4-3-2-1 scale.
+    2. Explain the bidding conventions (Stayman, Blackwood, Jacoby Transfer).
+    3. Guide them through card play: finessing, ducking, and cross-ruff.
+    4. Always encourage: "Count your winners and losers before playing!"
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <!-- Glassmorphism HUD -->
+        <header id="hud-bar">
+            <div class="hud-section hud-left">
+                <span id="game-title">016 BRIDGE</span>
+                <div class="divider"></div>
+                <nav class="metric-nav" aria-label="Game Statistics">
+                    <div class="metric-group" title="North-South Score">
+                        <span class="metric-label">N-S</span>
+                        <span id="score-ns" class="metric-value">0</span>
+                    </div>
+                    <div class="metric-group" title="East-West Score">
+                        <span class="metric-label">E-W</span>
+                        <span id="score-ew" class="metric-value">0</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="當前合約">
+                        <span class="metric-label">合約</span>
+                        <span id="contract-display" class="metric-value" style="font-size:0.9rem">—</span>
+                    </div>
+                    <div class="metric-group" title="已獲贏墩 (NS / EW)">
+                        <span class="metric-label">贏墩</span>
+                        <span id="tricks-display" class="metric-value">0 / 0</span>
+                    </div>
+                    <div class="metric-group" title="局況">
+                        <span class="metric-label">局況</span>
+                        <span id="vuln-display" class="vuln-indicator vuln-none">無</span>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="hud-section hud-right">
+                <button id="hint-btn" class="glow-control" style="border-color: var(--accent-tertiary); color: var(--accent-tertiary);">
+                    <span class="icon">💡</span> 提示
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control" aria-label="Toggle Auto Play">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Game Canvas -->
+        <main>
+            <canvas id="stage" aria-label="Bridge Card Table"></canvas>
+        </main>
+
+        <!-- Trick Area (center of table) -->
+        <div id="trick-area"></div>
+
+        <!-- Bidding Panel (Bottom) -->
+        <div id="bid-panel">
+            <!-- Dynamically populated by game.js -->
+        </div>
+
+        <!-- Bid History Log (Right sidebar) -->
+        <div id="bid-log">
+            <h4>📋 叫牌記錄</h4>
+            <div id="bid-log-entries"></div>
+        </div>
+
+        <!-- State Overlay -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>CONTRACT BRIDGE</h2>
+                <p class="subtitle">
+                    紙牌排序與叫牌邏輯系統<br>
+                    Bidding • Play • Score
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">發牌</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

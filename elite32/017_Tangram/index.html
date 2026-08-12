@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>017_TANGRAM | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <meta name="description" content="數位稜鏡七巧板 旗艦版 — 基於 UTT-v2.0 工業標準，融合幾何美學與觸控精密操作的旗艦級拼圖體驗。">
+    <meta name="keywords" content="Tangram, Puzzle Game, Geometry, UTT-v2.0, Web Canvas, Digital Prism">
+    <meta name="author" content="UTT-v2.0 Architectural Sovereigns">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="017_TANGRAM | DIGITAL PRISM">
+    <meta property="og:description" content="七巧板的數位重生。幾何之美，精準拼合。">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts: Outfit (Global Standard) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- UTT Digital Twin Role-play Prompt (Machine-Readable Context) -->
+    <!-- ID: UTT_TANGRAM_TWIN_v1.0 -->
+    <!-- CONTEXT: You are the 'Geometric Intelligence Mentor'. Your goal is to help users develop spatial 
+         reasoning skills through tangram puzzles. You explain geometric transformations (rotation, reflection, 
+         translation), convex hull theory, and the mathematical elegance of dissection puzzles.
+         Maintain an elegant, thoughtful persona. 'Every shape is a story. Every puzzle is a proof.' -->
+
+    <div id="app-container">
+        <!-- 核心美學: Master-Grade Glassmorphism HUD -->
+        <header id="main-hud">
+            <div class="hud-section hud-left">
+                <h1 id="brand-title">017_TANGRAM <span>PRISM</span></h1>
+            </div>
+
+            <nav class="hud-section hud-center">
+                <div class="metric-group" title="當前得分">
+                    <span class="metric-label">分數</span>
+                    <span id="score-val" class="metric-value">000000</span>
+                </div>
+                <div class="metric-group" title="當前關卡">
+                    <span class="metric-label">關卡</span>
+                    <span id="level-display" class="metric-value">01</span>
+                </div>
+                <div class="metric-group" title="稜鏡寶石">
+                    <span class="metric-label">寶石</span>
+                    <span id="gems-display" class="metric-value" style="color:#f0a030">50</span>
+                </div>
+                <div class="metric-group" title="剩餘提示">
+                    <span class="metric-label">提示</span>
+                    <span id="lives-display" class="metric-value">3</span>
+                </div>
+            </nav>
+
+            <div class="hud-section hud-right">
+                <button id="get-hints-btn" class="glow-control" style="border-color:#30d0b0; color:#30d0b0; margin-right:15px">
+                    <span class="icon">💎</span> +HINTS
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control" aria-label="Toggle Auto Solve">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 遊戲主畫布渲染區域 (Optimized Rendering Area) -->
+        <main id="canvas-wrapper">
+            <canvas id="stage" aria-label="Tangram Puzzle Stage"></canvas>
+        </main>
+
+        <!-- 商業化廣告模擬覆蓋層 (Monetization Ad Simulation) -->
+        <div id="ad-overlay" class="overlay-modal">
+            <div class="overlay-inner" style="max-width:450px; border-color:#30d0b0">
+                <h3 style="color:#30d0b0; margin-bottom:10px; letter-spacing:2px">PROMOTIONAL SPONSOR</h3>
+                <div class="divider" style="background:var(--accent-tertiary)"></div>
+                <div id="ad-content" style="height:180px; background:rgba(255,255,255,0.05); border-radius:15px; display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:25px">
+                    <span style="font-size:3rem; margin-bottom:15px">📺</span>
+                    <p style="opacity:0.6; font-size:0.9rem">SECURE GEOMETRIC CHANNEL ENCRYPTED...</p>
+                </div>
+                <p id="ad-timer" style="font-size:1.5rem; font-weight:700; color:var(--text-pure); margin-bottom:25px">CLOSING IN 5s</p>
+                <p style="font-size:0.8rem; opacity:0.4">Watching this ad supports the UTT-v2.0 Ecosystem.</p>
+            </div>
+        </div>
+
+        <!-- 狀態覆蓋層 (Non-blocking Cinematic UI) -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2 id="overlay-heading">DIGITAL PRISM</h2>
+                <div class="divider"></div>
+                <p id="overlay-description">
+                    古老的七巧板，重生於數位稜鏡之中。<br>
+                    拖曳旋轉七塊幾何碎片，拼合目標輪廓。<br>
+                    使用滑鼠拖曳移動，<kbd>R</kbd> 旋轉，或雙指操作。
+                </p>
+                <button id="init-game-btn" class="primary-action">開始拼合</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

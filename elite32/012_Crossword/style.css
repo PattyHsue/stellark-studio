@@ -1,0 +1,501 @@
+/* ============================================================
+   012_CROSSWORD | 填字魔方
+   Theme: Papyrus Scholar (紙墨學堂)
+   UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+   ============================================================ */
+
+/* === Design Tokens === */
+:root {
+    --bg-deep: #1a1410;
+    --bg-surface: #2a2218;
+    --bg-parchment: #f5e6c8;
+    --bg-parchment-alt: #ede0c0;
+    --accent-primary: #c0864a;
+    --accent-glow: #e8a855;
+    --accent-secondary: #6b8c5a;
+    --accent-tertiary: #4a7a9b;
+    --accent-danger: #c0392b;
+    --glass-bg: rgba(42, 34, 24, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-pure: #faf3e8;
+    --text-muted: rgba(250, 243, 232, 0.55);
+    --text-ink: #2c1810;
+    --cell-correct: #27ae60;
+    --cell-incorrect: #e74c3c;
+    --cell-active: #e8a855;
+    --cell-highlight: rgba(232, 168, 85, 0.25);
+    --grid-line: #8b7355;
+    --grid-black: #2c1810;
+    --hud-h: 56px;
+    --font-main: 'Outfit', 'Noto Sans TC', sans-serif;
+    --font-grid: 'Noto Serif TC', 'SimSun', serif;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --transition-fast: 0.2s ease;
+    --transition-med: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* === Reset & Base === */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    font-family: var(--font-main);
+    background: var(--bg-deep);
+    color: var(--text-pure);
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* === App Container === */
+#app-container {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    background:
+        radial-gradient(ellipse at 20% 80%, rgba(192, 134, 74, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(74, 122, 155, 0.06) 0%, transparent 50%),
+        linear-gradient(180deg, var(--bg-deep) 0%, #1f1a14 50%, var(--bg-surface) 100%);
+}
+
+/* === Glassmorphism HUD === */
+#hud-bar {
+    height: var(--hud-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.hud-section { display: flex; align-items: center; gap: 12px; }
+
+#game-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 1px; height: 20px;
+    background: var(--glass-border);
+    margin: 0 4px;
+}
+
+.metric-nav { display: flex; align-items: center; gap: 10px; }
+
+.metric-group {
+    display: flex; flex-direction: column;
+    align-items: center;
+    min-width: 50px;
+}
+
+.metric-label {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    font-weight: 300;
+}
+
+.metric-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-pure);
+    letter-spacing: 1px;
+}
+
+/* === Glow Buttons === */
+.glow-control {
+    background: transparent;
+    border: 1px solid var(--accent-primary);
+    color: var(--accent-primary);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-family: var(--font-main);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex; align-items: center; gap: 5px;
+    white-space: nowrap;
+}
+
+.glow-control:hover {
+    background: rgba(192, 134, 74, 0.15);
+    box-shadow: 0 0 15px rgba(192, 134, 74, 0.3);
+    transform: translateY(-1px);
+}
+
+.glow-control.active {
+    background: var(--accent-primary);
+    color: var(--bg-deep);
+    box-shadow: 0 0 20px rgba(232, 168, 85, 0.5);
+}
+
+.icon { font-style: normal; }
+
+/* === Main Game Area === */
+#game-area {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* === Crossword Grid Container === */
+#grid-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    position: relative;
+}
+
+#crossword-grid {
+    display: grid;
+    gap: 2px;
+    background: var(--grid-line);
+    border: 3px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    box-shadow:
+        0 0 30px rgba(192, 134, 74, 0.15),
+        inset 0 0 60px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* === Cell Styles === */
+.cell {
+    width: 42px; height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-grid);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-ink);
+    background: var(--bg-parchment);
+    position: relative;
+    cursor: pointer;
+    transition: background var(--transition-fast), transform 0.1s ease;
+}
+
+.cell:hover { background: var(--bg-parchment-alt); }
+
+.cell.black {
+    background: var(--grid-black);
+    cursor: default;
+    pointer-events: none;
+}
+
+.cell.active {
+    background: var(--cell-active) !important;
+    color: var(--bg-deep);
+    transform: scale(1.05);
+    z-index: 5;
+    box-shadow: 0 0 12px rgba(232, 168, 85, 0.6);
+}
+
+.cell.highlighted { background: var(--cell-highlight); }
+
+.cell.correct {
+    background: rgba(39, 174, 96, 0.2);
+    color: var(--cell-correct);
+}
+
+.cell.incorrect {
+    background: rgba(231, 76, 60, 0.15);
+    animation: shake 0.3s ease;
+}
+
+.cell .cell-number {
+    position: absolute;
+    top: 2px; left: 3px;
+    font-size: 0.5rem;
+    font-weight: 400;
+    color: var(--accent-tertiary);
+    font-family: var(--font-main);
+}
+
+.cell .cell-char {
+    font-family: var(--font-grid);
+    line-height: 1;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+
+@keyframes pulse-correct {
+    0% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.4); }
+    70% { box-shadow: 0 0 0 8px rgba(39, 174, 96, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0); }
+}
+
+.cell.word-complete { animation: pulse-correct 0.6s ease; }
+
+/* === Clue Panel (Right Sidebar) === */
+#clue-panel {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-left: 1px solid var(--glass-border);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-primary) transparent;
+}
+
+#clue-panel::-webkit-scrollbar { width: 4px; }
+#clue-panel::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 2px;
+}
+
+.clue-section {
+    padding: 12px 16px;
+}
+
+.clue-section h4 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent-primary);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.clue-item {
+    display: flex;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-bottom: 3px;
+    align-items: flex-start;
+}
+
+.clue-item:hover { background: rgba(192, 134, 74, 0.1); }
+
+.clue-item.active-clue {
+    background: rgba(232, 168, 85, 0.15);
+    border-left: 3px solid var(--accent-glow);
+}
+
+.clue-item.solved {
+    opacity: 0.45;
+    text-decoration: line-through;
+}
+
+.clue-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-glow);
+    min-width: 22px;
+}
+
+.clue-text {
+    font-size: 0.75rem;
+    color: var(--text-pure);
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+/* === Virtual Keyboard === */
+#keyboard-panel {
+    flex-shrink: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid var(--glass-border);
+}
+
+.key-btn {
+    width: 40px; height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-grid);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-pure);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.key-btn:hover {
+    background: rgba(192, 134, 74, 0.2);
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
+.key-btn:active {
+    transform: scale(0.92);
+    background: var(--accent-primary);
+    color: var(--bg-deep);
+}
+
+.key-btn.key-action {
+    width: auto;
+    padding: 0 14px;
+    font-family: var(--font-main);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* === State Overlay === */
+.overlay-modal {
+    position: fixed; inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(10, 8, 5, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-med);
+}
+
+.overlay-modal.active { opacity: 1; pointer-events: all; }
+
+.overlay-inner {
+    text-align: center;
+    max-width: 420px;
+    padding: 40px 50px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.overlay-inner h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.overlay-inner .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+.overlay-divider {
+    width: 60px; height: 2px;
+    margin: 15px auto;
+    background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+}
+
+.overlay-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 14px 40px;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--bg-deep);
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: 0 4px 20px rgba(192, 134, 74, 0.4);
+}
+
+.overlay-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 30px rgba(232, 168, 85, 0.55);
+}
+
+/* === Ad Overlay === */
+#ad-overlay .overlay-inner {
+    border-color: var(--accent-secondary);
+}
+
+#ad-timer {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-pure);
+    margin: 15px 0;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    #clue-panel { display: none; }
+    .cell { width: 34px; height: 34px; font-size: 1.1rem; }
+    .cell .cell-number { font-size: 0.4rem; }
+    #keyboard-panel { padding: 8px 10px; gap: 3px; }
+    .key-btn { width: 32px; height: 34px; font-size: 0.95rem; }
+    #hud-bar { padding: 0 10px; }
+    #game-title { font-size: 0.7rem; letter-spacing: 2px; }
+    .metric-label { font-size: 0.45rem; }
+    .metric-value { font-size: 0.8rem; }
+}
+
+@media (max-width: 480px) {
+    .cell { width: 28px; height: 28px; font-size: 0.9rem; }
+    .key-btn { width: 28px; height: 30px; font-size: 0.8rem; }
+}
+
+/* === Animations === */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeInUp 0.5s ease forwards; }
+
+/* === Timer Pulse === */
+.timer-critical {
+    animation: timerBlink 0.8s ease infinite;
+    color: var(--accent-danger) !important;
+}
+
+@keyframes timerBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* === Particle Canvas === */
+#vfx-canvas {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 450;
+}

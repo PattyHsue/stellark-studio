@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>UTT-v2.0 旗艦：幾何律動 (Tetris Remix)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+</head>
+<body class="theme-neon">
+    <div id="game-container">
+        <header class="glass-header">
+            <div class="header-left">
+                <h1 class="game-title">🔳 幾何律動 <span>TETRIS REMIX</span></h1>
+            </div>
+            <div class="header-stats">
+                <div class="stat"><span class="label">等級</span><span id="level">1</span></div>
+                <div class="stat"><span class="label">分數</span><span id="score">00000</span></div>
+                <div class="stat"><span class="label">消行</span><span id="lines">0</span></div>
+            </div>
+        </header>
+
+        <main id="play-area">
+            <!-- Sidebar: Hold -->
+            <aside class="sidebar-left">
+                <div class="box hold-box">
+                    <span class="box-label">持有 (Shift/C)</span>
+                    <canvas id="holdCanvas"></canvas>
+                </div>
+            </aside>
+
+            <!-- Main Canvas -->
+            <div class="canvas-wrapper">
+                <div id="game-overlay" class="overlay active">
+                    <div class="overlay-card">
+                        <h2 class="title">時空方塊</h2>
+                        <p class="desc">控制幾何與引力，維持宇宙的平衡。</p>
+                        <button id="start-game-btn" class="start-btn">重力感應開始</button>
+                    </div>
+                </div>
+                <canvas id="gameCanvas"></canvas>
+            </div>
+
+            <!-- Sidebar: Next & Settings -->
+            <aside class="sidebar-right">
+                <div class="box next-box">
+                    <span class="box-label">下一個</span>
+                    <canvas id="nextCanvas"></canvas>
+                </div>
+                <div class="box controls-box">
+                    <span class="box-label">設定</span>
+                    <button id="ghost-toggle" class="mini-btn">👻 輔助投射: ON</button>
+                    <button id="autopilot-toggle" class="mini-btn">🤖 自動駕駛: OFF</button>
+                    <button id="audio-toggle" class="mini-btn">🔊 律動音樂</button>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="glass-footer">
+            <p>DESIGNED BY UTT-v2.0 | ADVISOR: COMMANDER PATRICIA HSU</p>
+        </footer>
+    </div>
+
+    <!-- 腳本加載 -->
+    <script src="js/shapes.js"></script>
+    <script src="js/effects.js"></script>
+    <script src="js/ai.js"></script>
+    <script src="js/engine.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

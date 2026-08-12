@@ -1,0 +1,146 @@
+/* ============================================================
+   010_HIDDEN_OBJECT | 尋物大冒險 (秘術檔案館)
+   Theme: Arcane Library
+   UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+   ============================================================ */
+
+:root {
+    --bg-deep: #0f0914;
+    --bg-surface: #1e1329;
+    --accent-primary: #f59e0b; /* Amber */
+    --accent-glow: #fbbf24;
+    --accent-secondary: #8b5cf6; /* Mystic Purple */
+    --accent-tertiary: #14b8a6; /* Teal */
+    --accent-error: #ef4444;
+    --glass-bg: rgba(30, 19, 41, 0.85);
+    --glass-border: rgba(245, 158, 11, 0.25);
+    --text-pure: #fef3c7;
+    --text-muted: #9ca3af;
+    --hud-h: 60px;
+    --font-main: 'Outfit', 'Noto Sans TC', sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --transition-fast: 0.2s ease;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    font-family: var(--font-main);
+    background: var(--bg-deep); color: var(--text-pure);
+    user-select: none; -webkit-user-select: none;
+}
+
+#app-container {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 100%, rgba(245, 158, 11, 0.1) 0%, transparent 40%),
+        linear-gradient(135deg, #0f0914 0%, #1e1329 100%);
+}
+
+/* === HUD === */
+#hud-bar {
+    height: var(--hud-h); display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; background: var(--glass-bg); backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border); z-index: 100; flex-shrink: 0;
+}
+.hud-section { display: flex; align-items: center; gap: 16px; }
+#game-title {
+    font-size: 0.95rem; font-weight: 800; letter-spacing: 4px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.divider { width: 1px; height: 24px; background: var(--glass-border); margin: 0 4px; }
+.metric-nav { display: flex; gap: 20px; }
+.metric-group { display: flex; flex-direction: column; align-items: center; min-width: 50px; }
+.metric-label { font-size: 0.55rem; letter-spacing: 2px; color: var(--accent-primary); text-transform: uppercase; font-weight: 600; }
+.metric-value { font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; }
+
+.glow-control {
+    background: transparent; border: 1px solid var(--accent-primary);
+    color: var(--accent-primary); padding: 8px 18px; border-radius: 30px;
+    font-family: var(--font-main); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 1px; cursor: pointer; transition: all var(--transition-fast);
+    display: flex; align-items: center; gap: 6px;
+}
+.glow-control:hover { background: rgba(245, 158, 11, 0.15); box-shadow: 0 0 15px rgba(245, 158, 11, 0.3); }
+.glow-control.active { background: var(--accent-primary); color: #000; box-shadow: 0 0 20px rgba(245, 158, 11, 0.5); }
+
+/* === GAME STAGE === */
+#game-area { flex: 1; display: flex; flex-direction: column; position: relative; overflow: hidden; padding: 10px; gap: 10px;}
+
+#canvas-wrapper {
+    flex: 1; position: relative; border-radius: var(--radius-md);
+    border: 1px solid rgba(139, 92, 246, 0.4); overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    cursor: crosshair;
+}
+#stage { display: block; width: 100%; height: 100%; background: #000; }
+
+.error-flash {
+    position: absolute; inset: 0; background: rgba(239, 68, 68, 0.3);
+    pointer-events: none; opacity: 0; transition: opacity 0.3s;
+}
+.error-flash.active { opacity: 1; transition: none; }
+
+/* === TARGET TRAY === */
+#target-tray {
+    height: 70px; background: rgba(20, 10, 30, 0.9);
+    border: 1px solid var(--glass-border); border-radius: var(--radius-md);
+    display: flex; justify-content: center; align-items: center; gap: 20px;
+    padding: 0 20px; box-shadow: inset 0 0 20px rgba(139, 92, 246, 0.2);
+}
+.target-item {
+    display: flex; flex-direction: column; align-items: center;
+    transition: opacity 0.3s; opacity: 1;
+}
+.target-item.found { opacity: 0.3; filter: grayscale(100%); text-decoration: line-through; color: var(--accent-error); }
+.target-icon { font-size: 1.8rem; filter: drop-shadow(0 2px 5px rgba(245, 158, 11, 0.4)); }
+.target-name { font-size: 0.6rem; color: var(--text-muted); margin-top: 4px; letter-spacing: 1px; }
+
+/* === OVERLAYS === */
+.overlay-modal {
+    position: fixed; inset: 0; display: flex; justify-content: center; align-items: center;
+    background: rgba(10, 6, 16, 0.95); backdrop-filter: blur(20px);
+    z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+}
+.overlay-modal.active { opacity: 1; pointer-events: all; }
+
+.overlay-inner {
+    text-align: center; max-width: 480px; padding: 50px;
+    border: 1px solid var(--glass-border); border-radius: var(--radius-lg); background: var(--glass-bg);
+}
+.overlay-inner h2 {
+    font-size: 2.5rem; font-weight: 800; letter-spacing: 6px; margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.overlay-inner h2.win-text { 
+    background: linear-gradient(135deg, var(--accent-tertiary), var(--accent-glow)); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity:1; 
+}
+.overlay-inner h2.lose-text { 
+    background: linear-gradient(135deg, var(--accent-error), #b91c1c); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity:1; 
+}
+
+.overlay-inner .subtitle { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+.overlay-divider { width: 60px; height: 3px; margin: 20px auto; background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent); }
+
+.diff-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+.diff-btn {
+    background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted);
+    padding: 8px 16px; border-radius: 25px; font-family: var(--font-main); font-size: 0.8rem;
+    cursor: pointer; transition: all 0.2s;
+}
+.diff-btn.active { background: var(--accent-primary); border-color: var(--accent-primary); color: #000; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+
+.overlay-btn {
+    padding: 16px 50px; font-family: var(--font-main); font-size: 1rem; font-weight: 700;
+    letter-spacing: 3px; color: #000; background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+    border: none; border-radius: 35px; cursor: pointer; transition: all 0.2s;
+}
+.overlay-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.5); }

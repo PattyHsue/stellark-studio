@@ -1,0 +1,456 @@
+/* =========================================================================
+   016_BridgePro | UTT-v2.0 MASTER-GRADE ENGINE
+   Theme: STEEL BLUEPRINT — Industrial Engineering Aesthetic
+   ========================================================================= */
+
+/* === DESIGN TOKENS === */
+:root {
+    /* Core Palette: Steel Blueprint */
+    --accent-primary: #3a8fd8;       /* Steel Blue */
+    --accent-secondary: #f08030;     /* Weld Orange */
+    --accent-tertiary: #30d08a;      /* Stress Green */
+    --accent-glow: #60b0ff;          /* Blueprint Glow */
+    --accent-danger: #e04050;        /* Structural Failure Red */
+
+    /* Glass System */
+    --glass-bg: rgba(10, 18, 32, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(58, 143, 216, 0.15);
+
+    /* Typography */
+    --text-pure: #f0f4f8;
+    --text-muted: rgba(240, 244, 248, 0.55);
+    --text-glow: rgba(96, 176, 255, 0.8);
+
+    /* Surfaces */
+    --bg-deep: #060c18;
+    --bg-surface: #0c1628;
+    --bg-grid: rgba(58, 143, 216, 0.04);
+
+    /* Spacing */
+    --hud-height: 64px;
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+}
+
+/* === RESET & BASE === */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-pure);
+    cursor: crosshair;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* === SCANLINE OVERLAY === */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(58, 143, 216, 0.015) 2px,
+        rgba(58, 143, 216, 0.015) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* === BLUEPRINT GRID OVERLAY === */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--bg-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+}
+
+/* === APP CONTAINER === */
+#app-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === GLASSMORPHISM HUD === */
+#hud-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--hud-height);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* HUD Section Layout */
+.hud-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hud-left {
+    gap: 20px;
+}
+
+.hud-right {
+    gap: 12px;
+}
+
+/* Game Title */
+#game-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    position: relative;
+}
+
+#game-title::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), transparent);
+    border-radius: 1px;
+}
+
+/* Metric Groups */
+.metric-nav {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.metric-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+}
+
+.metric-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.metric-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-pure);
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 10px var(--text-glow);
+}
+
+.divider {
+    width: 1px;
+    height: 28px;
+    background: var(--glass-border);
+    margin: 0 4px;
+}
+
+/* === GLOW CONTROL BUTTON === */
+.glow-control {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 8px 18px;
+    border: 1px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--accent-primary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.glow-control:hover {
+    background: var(--glass-highlight);
+    box-shadow: 0 0 20px rgba(58, 143, 216, 0.25);
+    transform: translateY(-1px);
+}
+
+.glow-control.active {
+    background: var(--accent-primary);
+    color: var(--bg-deep);
+    box-shadow: 0 0 25px rgba(58, 143, 216, 0.4);
+}
+
+.glow-control .icon {
+    font-size: 0.9rem;
+}
+
+/* === BUILD MODE CONTROLS === */
+#build-controls {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 12px;
+    padding: 12px 24px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.build-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 10px 22px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--text-pure);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.build-btn:hover {
+    background: var(--glass-highlight);
+    border-color: var(--accent-primary);
+}
+
+.build-btn.active {
+    background: var(--accent-primary);
+    color: var(--bg-deep);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 15px rgba(58, 143, 216, 0.3);
+}
+
+.build-btn.danger {
+    border-color: var(--accent-danger);
+    color: var(--accent-danger);
+}
+
+.build-btn.danger:hover {
+    background: rgba(224, 64, 80, 0.15);
+}
+
+.build-btn.success {
+    border-color: var(--accent-tertiary);
+    color: var(--accent-tertiary);
+}
+
+.build-btn.success:hover {
+    background: rgba(48, 208, 138, 0.15);
+}
+
+/* === CANVAS === */
+#stage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+/* === OVERLAY MODAL === */
+.overlay-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(6, 12, 24, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.overlay-modal.active {
+    display: flex;
+}
+
+.overlay-inner {
+    text-align: center;
+    padding: 50px 60px;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    background: var(--glass-bg);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+    max-width: 520px;
+    animation: overlayIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes overlayIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.overlay-inner h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.overlay-inner .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.overlay-inner .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    margin: 0 auto 30px;
+    border-radius: 1px;
+}
+
+.overlay-btn {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    padding: 14px 45px;
+    border: 2px solid var(--accent-primary);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--accent-primary);
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+}
+
+.overlay-btn:hover {
+    background: var(--accent-primary);
+    color: var(--bg-deep);
+    box-shadow: 0 0 35px rgba(58, 143, 216, 0.4);
+    transform: translateY(-2px);
+}
+
+/* === STRESS INDICATOR === */
+.stress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 2px;
+}
+
+.stress-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-tertiary), var(--accent-secondary), var(--accent-danger));
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(48, 208, 138, 0.4);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    :root {
+        --hud-height: 52px;
+    }
+
+    #game-title {
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+    }
+
+    .metric-nav {
+        gap: 14px;
+    }
+
+    .metric-value {
+        font-size: 0.95rem;
+    }
+
+    .glow-control {
+        font-size: 0.65rem;
+        padding: 6px 12px;
+    }
+
+    #build-controls {
+        bottom: 16px;
+        padding: 8px 16px;
+        gap: 8px;
+    }
+
+    .build-btn {
+        font-size: 0.7rem;
+        padding: 8px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    #game-title::after {
+        display: none;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .metric-label {
+        font-size: 0.5rem;
+    }
+}

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Octagonal Melody | 八角旋律典藏</title>
+    <meta name="description" content="探索百年工藝與永恆旋律的交匯——沉浸式八音盒產品展示">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loader">
+        <div class="loader-inner">
+            <div class="loader-text">OCTAGONAL</div>
+            <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
+            <div class="loader-percent" id="loader-percent">0%</div>
+        </div>
+    </div>
+
+    <!-- Ambient Background Glow -->
+    <div class="ambient-glow" id="ambient-glow"></div>
+
+    <!-- Navigation -->
+    <nav class="glass-nav" id="main-nav">
+        <div class="nav-logo">OCTAGONAL</div>
+        <div class="nav-links">
+            <a href="#act1">工藝</a>
+            <a href="#act2">旋律</a>
+            <a href="#about">品牌</a>
+            <a href="#collection">典藏</a>
+            <button class="nav-cta" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">立即收藏</button>
+        </div>
+    </nav>
+
+    <!-- ═══════════ ACT I: The Box Opens ═══════════ -->
+    <section class="act" id="act1">
+        <div class="canvas-stage">
+            <canvas id="product-canvas"></canvas>
+            <div class="canvas-vignette"></div>
+        </div>
+        <div class="scroll-panel" id="panel-1">
+            <div class="glass-card">
+                <span class="card-label">Act I — 工藝</span>
+                <h1>極致八角工藝</h1>
+                <p>精選紫檀與黃銅，歷經三百道工序。每一條稜線的弧度，皆是匠人數十年功力的凝結。向下滾動，見證盒蓋的優雅開啟。</p>
+            </div>
+        </div>
+        <div class="scroll-panel" id="panel-2">
+            <div class="glass-card card-right">
+                <span class="card-label">機芯</span>
+                <h2>瑞士精密齒輪組</h2>
+                <p>72 音階的鍍金音梳，以 0.01mm 的公差逐一校準。每一次撥動，都是一段被封印的時光。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ TRANSITION ═══════════ -->
+    <section class="transition-zone" id="transition">
+        <div class="transition-line"></div>
+        <div class="transition-text">盒蓋緩緩開啟，旋律自光影中甦醒⋯</div>
+        <div class="transition-line"></div>
+    </section>
+
+    <!-- ═══════════ ACT II: The Ballerina Dances ═══════════ -->
+    <section class="act" id="act2">
+        <div class="video-stage">
+            <video id="ballerina-video" muted loop playsinline preload="auto"
+                   poster="./assets/music_box_open.jpeg">
+                <source src="./assets/ballerina_dance.mp4" type="video/mp4">
+            </video>
+            <div class="video-vignette"></div>
+        </div>
+        <div class="scroll-panel" id="panel-3">
+            <div class="glass-card">
+                <span class="card-label">Act II — 旋律</span>
+                <h2>芭蕾舞伶的永恆圓舞曲</h2>
+                <p>當盒蓋完全開啟，瓷製舞伶便在鍍金舞台上翩然起舞。她的每一個旋轉，都是對逝去時光最溫柔的致敬。</p>
+            </div>
+        </div>
+        <div class="scroll-panel" id="panel-4">
+            <div class="glass-card card-right">
+                <span class="card-label">靈魂</span>
+                <h2>光與影的對話</h2>
+                <p>在深夜的微光中，八音盒的旋律與舞伶的身影交織成一幅流動的詩篇。這不僅是機械的精密，更是藝術的呼吸。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ ABOUT US ═══════════ -->
+    <section class="section-block" id="about">
+        <div class="section-header">
+            <span class="card-label">關於我們</span>
+            <h2>Octagonal — 百年工藝的守護者</h2>
+            <p class="section-subtitle">Since 1926 · Geneva, Switzerland</p>
+        </div>
+        <div class="about-grid">
+            <div class="glass-card about-card">
+                <div class="about-icon">🏛️</div>
+                <h3>百年傳承</h3>
+                <p>自 1926 年於日內瓦創立，Octagonal 家族四代匠人堅守手工製盒的傳統，將每一台八音盒視為藝術品而非商品。</p>
+            </div>
+            <div class="glass-card about-card">
+                <div class="about-icon">🤲</div>
+                <h3>匠心獨具</h3>
+                <p>每一台 Octagonal 八音盒需耗時 6 至 18 個月手工製作。我們拒絕流水線，只信任雙手與時間。</p>
+            </div>
+            <div class="glass-card about-card">
+                <div class="about-icon">🌿</div>
+                <h3>永續承諾</h3>
+                <p>所有木材均取自 FSC 認證的永續林場。黃銅與金箔採用回收材料精煉，確保每一份美都不以地球為代價。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PRODUCT FEATURES ═══════════ -->
+    <section class="section-block" id="features">
+        <div class="section-header">
+            <span class="card-label">產品規格</span>
+            <h2>匠心工藝，細節致勝</h2>
+        </div>
+        <div class="features-grid">
+            <div class="glass-card feature-item">
+                <div class="feature-num">01</div>
+                <h3>八角紫檀外殼</h3>
+                <p>選用百年自然風乾的印度紫檀，八角切割設計強化聲學共鳴，使旋律更加飽滿溫潤。</p>
+            </div>
+            <div class="glass-card feature-item">
+                <div class="feature-num">02</div>
+                <h3>72 音階機芯</h3>
+                <p>瑞士 Reuge 頂級機芯，可演奏完整古典樂章。音梳以鎳銀合金打造，音色清澈如水晶。</p>
+            </div>
+            <div class="glass-card feature-item">
+                <div class="feature-num">03</div>
+                <h3>手繪瓷製舞伶</h3>
+                <p>由法國利摩日 (Limoges) 瓷藝大師手繪燒製，每一位舞伶的面容與衣褶皆獨一無二。</p>
+            </div>
+            <div class="glass-card feature-item">
+                <div class="feature-num">04</div>
+                <h3>鍍金機械裝置</h3>
+                <p>18K 鍍金齒輪組與轉盤，搭配寶石軸承。開蓋即啟動，旋轉流暢且靜音。</p>
+            </div>
+            <div class="glass-card feature-item">
+                <div class="feature-num">05</div>
+                <h3>橢圓鏡面</h3>
+                <p>盒蓋內嵌復古銅框橢圓鏡，映射舞伶的倒影，創造無限延伸的視覺詩意。</p>
+            </div>
+            <div class="glass-card feature-item">
+                <div class="feature-num">06</div>
+                <h3>專屬序號</h3>
+                <p>每台八音盒底部鐫刻獨立序號與製作年份，附贈原廠真品證書與匠人親筆簽名。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ COLLECTION / PRICING ═══════════ -->
+    <section class="section-block" id="collection">
+        <div class="section-header">
+            <span class="card-label">典藏系列</span>
+            <h2>選擇屬於您的永恆旋律</h2>
+        </div>
+        <div class="pricing-grid">
+            <div class="glass-card pricing-card">
+                <div class="pricing-tier">經典系列</div>
+                <h3>Nocturne</h3>
+                <p class="pricing-desc">36 音階 · 胡桃木 · 圓形舞台</p>
+                <div class="pricing-price">NT$ 128,000</div>
+                <ul class="pricing-list">
+                    <li>胡桃木六角外殼</li>
+                    <li>36 音階 Sankyo 機芯</li>
+                    <li>單曲：乘著歌聲的翅膀</li>
+                    <li>原廠禮盒包裝</li>
+                </ul>
+                <button class="pricing-btn">了解更多</button>
+            </div>
+            <div class="glass-card pricing-card pricing-featured">
+                <div class="pricing-badge">匠人推薦</div>
+                <div class="pricing-tier">旗艦系列</div>
+                <h3>Octagonal Melody</h3>
+                <p class="pricing-desc">72 音階 · 紫檀木 · 芭蕾舞伶</p>
+                <div class="pricing-price">NT$ 368,000</div>
+                <ul class="pricing-list">
+                    <li>紫檀木八角外殼</li>
+                    <li>72 音階 Reuge 機芯</li>
+                    <li>手繪利摩日瓷製舞伶</li>
+                    <li>18K 鍍金機械組</li>
+                    <li>匠人親筆簽名證書</li>
+                </ul>
+                <button class="pricing-btn pricing-btn-gold">預約鑑賞</button>
+            </div>
+            <div class="glass-card pricing-card">
+                <div class="pricing-tier">傳世系列</div>
+                <h3>Héritage</h3>
+                <p class="pricing-desc">144 音階 · 烏木 · 雙人舞伶</p>
+                <div class="pricing-price">NT$ 880,000</div>
+                <ul class="pricing-list">
+                    <li>馬達加斯加烏木外殼</li>
+                    <li>144 音階雙機芯</li>
+                    <li>雙舞伶旋轉舞台</li>
+                    <li>鑲嵌施華洛世奇水晶</li>
+                    <li>家族姓氏客製雕刻</li>
+                </ul>
+                <button class="pricing-btn">專屬預約</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ TESTIMONIALS ═══════════ -->
+    <section class="section-block" id="testimonials">
+        <div class="section-header">
+            <span class="card-label">鑑賞迴響</span>
+            <h2>收藏家的真實感言</h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="glass-card testimonial-card">
+                <p class="testimonial-quote">"當我第一次聽到 Octagonal Melody 的旋律，我知道這不只是一台八音盒，而是一段被凝固的記憶。"</p>
+                <div class="testimonial-author">— 林博士，台北，Héritage 收藏家</div>
+            </div>
+            <div class="glass-card testimonial-card">
+                <p class="testimonial-quote">"送給母親的八十大壽禮物。她打開盒蓋的那一刻，看到舞伶旋轉，眼眶就紅了。值得每一分錢。"</p>
+                <div class="testimonial-author">— 陳先生，新竹，Octagonal Melody 持有者</div>
+            </div>
+            <div class="glass-card testimonial-card">
+                <p class="testimonial-quote">"作為鐘錶收藏家，我對機械精度有極高要求。Reuge 機芯的表現超出預期，這是真正的瑞士品質。"</p>
+                <div class="testimonial-author">— James W.，倫敦，Nocturne 系列</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ FINALE: CTA ═══════════ -->
+    <section class="finale" id="finale">
+        <div class="finale-content">
+            <h2>收藏 · 傳承</h2>
+            <p>每一台 Octagonal 八音盒，都承載著一段不可複製的故事。<br>讓這份永恆的旋律，成為您家族最珍貴的遺產。</p>
+            <div class="finale-actions">
+                <button class="finale-cta">探索完整系列</button>
+                <button class="finale-cta-outline">預約私人鑑賞</button>
+            </div>
+            <p class="finale-note">📞 +886-3-555-8888 ｜ 📧 atelier@octagonal.com</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">OCTAGONAL</div>
+            <div class="footer-links">
+                <a href="#">隱私政策</a><a href="#">使用條款</a><a href="#">聯絡我們</a>
+            </div>
+            <div class="footer-copy">© 2026 Octagonal Melody. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

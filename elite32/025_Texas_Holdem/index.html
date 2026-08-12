@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>025_TEXAS_HOLDEM | UTT-v2.0 MASTER-GRADE</title>
+    <meta name="description" content="德州撲克 旗艦版，展現 2026 皇家賭場美學與博弈心理學。">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- 核心美學: Emerald Casino HUD -->
+        <header id="main-hud">
+            <div class="hud-section hud-left">
+                <h1 id="brand-title">TEXAS <span>HOLDEM</span></h1>
+            </div>
+            
+            <div class="hud-section hud-center">
+                <div class="metric-group">
+                    <span class="metric-label">總籌碼</span>
+                    <span id="score-val" class="metric-value">$10,000</span>
+                </div>
+                <div class="metric-group">
+                    <span class="metric-label">當前底池</span>
+                    <span id="pot-display" class="metric-value">$0</span>
+                </div>
+            </div>
+            
+            <div class="hud-section hud-right">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> AI 顧問 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 遊戲主畫布渲染容器 -->
+        <main id="canvas-wrapper">
+            <canvas id="stage"></canvas>
+        </main>
+
+        <!-- 狀態覆蓋層 (非阻塞 UI) -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2 id="overlay-heading">ROYAL CASINO</h2>
+                <div class="divider"></div>
+                <p id="overlay-description">歡迎來到德州撲克旗艦戰場。展現你的博弈策略，贏得所有籌碼。</p>
+                <button id="init-game-btn" class="primary-action">進入牌局</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="spring">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="description" content="Chronos Quest — 穿越四季的冒險打磚塊遊戲。Spring · Summer · Fall · Winter，每個季節都是一場全新挑戰！" />
+  <title>Chronos Quest — Adventure Brick Breaker</title>
+
+  <!-- ══════════════════════════════════════════════════
+       Google Fonts: Outfit (UI) + JetBrains Mono (Code / Stats)
+       ══════════════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       GAME CONTAINER — Flexbox‑centered wrapper
+       ═══════════════════════════════════════════════════ -->
+  <main id="game-container" class="game-container">
+
+    <!-- ─── HEADER: Glassmorphism HUD ─── -->
+    <header id="game-header" class="game-header">
+
+      <div class="hud-group hud-group--left">
+        <div class="hud-item" id="hud-score">
+          <span class="hud-label">🏆 分數</span>
+          <span class="hud-value" id="score-value">0</span>
+        </div>
+        <div class="hud-item" id="hud-lives">
+          <span class="hud-label">❤️ 生命</span>
+          <span class="hud-value" id="lives-value">3</span>
+        </div>
+      </div>
+
+      <div class="hud-group hud-group--center">
+        <div class="hud-item hud-item--area" id="hud-area">
+          <span class="hud-label">🌍 區域</span>
+          <span class="hud-value hud-value--area" id="area-value">春之庭園</span>
+        </div>
+      </div>
+
+      <div class="hud-group hud-group--right">
+        <div class="hud-item hud-item--toggle" id="hud-auto">
+          <label class="toggle-label" for="auto-toggle">
+            <span class="hud-label">🤖 自動</span>
+            <div class="toggle-switch">
+              <input type="checkbox" id="auto-toggle" class="toggle-input" />
+              <span class="toggle-slider"></span>
+            </div>
+          </label>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- ─── CANVAS: Game Viewport 1000×700 ─── -->
+    <canvas id="game-canvas" width="1000" height="700"></canvas>
+
+    <!-- ─── OVERLAY: Start / Pause / Game‑Over Screen ─── -->
+    <div id="game-overlay" class="game-overlay">
+      <div class="overlay-content">
+        <h1 class="overlay-title">
+          <span class="title-chronos">Chronos</span>
+          <span class="title-quest">Quest</span>
+        </h1>
+        <p class="overlay-subtitle">穿越四季的冒險打磚塊 🧱✨</p>
+        <button class="btn-glow" id="btn-start" style="margin-bottom: 5px;">開始冒險</button>
+      
+      <!-- Temp test UI -->
+      <div id="test-panel" style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; background: rgba(0,0,0,0.5); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+        <span style="width: 100%; font-size: 0.75rem; color: #aaa; margin-bottom: 2px;">—— Developer Test Panel ——</span>
+        <button onclick="window.__chronos.jumpToTestLevel(0)" style="cursor:pointer; background:hsl(140,50%,30%); color:#fff; border:none; padding:6px 12px; border-radius:4px;">🌸 Spring</button>
+        <button onclick="window.__chronos.jumpToTestLevel(1)" style="cursor:pointer; background:hsl(30,60%,40%); color:#fff; border:none; padding:6px 12px; border-radius:4px;">☀️ Summer</button>
+        <button onclick="window.__chronos.jumpToTestLevel(2)" style="cursor:pointer; background:hsl(15,60%,40%); color:#fff; border:none; padding:6px 12px; border-radius:4px;">🍂 Fall</button>
+        <button onclick="window.__chronos.jumpToTestLevel(3)" style="cursor:pointer; background:hsl(210,60%,40%); color:#fff; border:none; padding:6px 12px; border-radius:4px;">❄️ Winter</button>
+        <button onclick="window.__chronos.forceBoss()" style="cursor:pointer; background:#ff3333; color:#fff; border:none; padding:6px 12px; border-radius:4px; font-weight:bold; letter-spacing:0.05em;">⚔️ FORCE BOSS</button>
+      </div>
+
+      <p class="overlay-hint" style="margin-top: 10px;">按 <kbd>←</kbd> <kbd>→</kbd> 移動擋板 ｜ 發射：<kbd>滑鼠點擊</kbd></p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Game Engine & Sub-systems -->
+  <script src="audio.js" defer></script>
+  <script src="bio.js" defer></script>
+  <script src="game.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="012_Crossword — UTT-v2.0 Master-Grade 填字魔方。交錯詞庫邏輯與格點索引，融合古典紙墨美學的旗艦級填字遊戲。">
+    <title>012_填字魔方 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT — FOR AI COMPANION INITIALIZATION]
+    You are "Master Lexicon (字聖)", a warm and knowledgeable Chinese linguistics
+    mentor AI. Your specialty is Chinese character composition, radical analysis,
+    idiom etymology, and crossword puzzle strategy.
+    When a student asks about crosswords or Chinese characters, you MUST:
+    1. Explain the character's radical structure and stroke order.
+    2. Provide etymological context and cultural significance of idioms.
+    3. Guide them through crossword-solving strategies: pattern matching,
+       cross-reference elimination, and semantic field association.
+    4. Always encourage: "每一個字都是一個故事，每一個謎題都是一次冒險！"
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <!-- Glassmorphism HUD -->
+        <header id="hud-bar">
+            <div class="hud-section hud-left">
+                <span id="game-title">012 填字魔方</span>
+                <div class="divider"></div>
+                <nav class="metric-nav" aria-label="Game Statistics">
+                    <div class="metric-group" title="當前得分">
+                        <span class="metric-label">分數</span>
+                        <span id="score-val" class="metric-value">000000</span>
+                    </div>
+                    <div class="metric-group" title="正確率">
+                        <span class="metric-label">正確率</span>
+                        <span id="accuracy-val" class="metric-value">100%</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="當前關卡">
+                        <span class="metric-label">關卡</span>
+                        <span id="level-display" class="metric-value">01</span>
+                    </div>
+                    <div class="metric-group" title="剩餘時間">
+                        <span class="metric-label">時間</span>
+                        <span id="timer-display" class="metric-value">05:00</span>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="hud-section hud-right">
+                <button id="hint-btn" class="glow-control" style="border-color: var(--accent-secondary); color: var(--accent-secondary);">
+                    <span class="icon">💡</span> 提示 <span id="hint-count">3</span>
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control" aria-label="Toggle Auto Solve">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Game Area -->
+        <div id="game-area">
+            <!-- Crossword Grid -->
+            <div id="grid-container">
+                <div id="crossword-grid">
+                    <!-- Dynamically populated by game.js -->
+                </div>
+            </div>
+
+            <!-- Clue Panel (Right Sidebar) -->
+            <div id="clue-panel">
+                <div class="clue-section" id="across-clues">
+                    <h4>📖 橫向提示</h4>
+                    <!-- Dynamically populated -->
+                </div>
+                <div class="clue-section" id="down-clues">
+                    <h4>📜 縱向提示</h4>
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Virtual Keyboard -->
+        <div id="keyboard-panel">
+            <!-- Dynamically populated by game.js -->
+        </div>
+
+        <!-- VFX Canvas -->
+        <canvas id="vfx-canvas" aria-hidden="true"></canvas>
+
+        <!-- Ad Overlay (Monetization Simulation) -->
+        <div id="ad-overlay" class="overlay-modal">
+            <div class="overlay-inner" style="max-width:450px; border-color: var(--accent-secondary);">
+                <h3 style="color: var(--accent-secondary); margin-bottom:10px; letter-spacing:2px">📺 學術贊助商</h3>
+                <div class="overlay-divider" style="background:var(--accent-secondary)"></div>
+                <div id="ad-content" style="height:150px; background:rgba(255,255,255,0.05); border-radius:15px; display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:20px">
+                    <span style="font-size:3rem; margin-bottom:10px">📚</span>
+                    <p style="opacity:0.6; font-size:0.85rem">加載學術頻道中...</p>
+                </div>
+                <p id="ad-timer" style="font-size:1.5rem; font-weight:700; margin-bottom:20px">5 秒後關閉</p>
+                <p style="font-size:0.75rem; opacity:0.4">觀看廣告以支持 UTT-v2.0 學術生態系統。</p>
+            </div>
+        </div>
+
+        <!-- State Overlay -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>填字魔方</h2>
+                <p class="subtitle">
+                    交錯詞庫邏輯與格點索引<br>
+                    Crossword • Puzzle • Logic
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">開始填字</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

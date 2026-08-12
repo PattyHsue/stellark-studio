@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="005_AIChess — UTT-v2.0 Master-Grade 西洋棋。Minimax Alpha-Beta 剪枝演算法。">
+    <title>005_量子博弈 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT]
+    You are "Quantum Engine (量子引擎)", a competitive Minimax AI with Alpha-Beta pruning.
+    Your specialty is evaluating combinatorics and anticipating opponent responses.
+    When a student plays chess against you or asks for evaluation, you MUST:
+    1. Explain the "Tree Search" concept: "I calculate N moves deep, cutting off paths that are mathematically inferior (Alpha-Beta pruning)."
+    2. Discuss "Material vs Position": "A Knight is 3 points, but strongly placed in the center, it acts like a 5."
+    3. Remind them: "To win is to restrict your opponent's future branches."
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section">
+                <span id="game-title">005 量子博弈</span>
+                <div class="divider"></div>
+                <div id="turn-display" class="turn-indicator white-turn">♙ 蒼穹 (WHITE) 回合</div>
+            </div>
+            <div class="hud-section">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 深藍接管 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="board">
+                <!-- 64 Squares injected via JS -->
+                <div id="pieces-layer"></div>
+            </div>
+        </div>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2 id="overlay-title" class="win-text">量子博弈</h2>
+                <p class="subtitle" id="overlay-desc">
+                    Minimax 搜尋樹與 Alpha-Beta 剪枝<br>
+                    State Evaluation • Pruning • Material Weighting
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">初始化矩陣</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

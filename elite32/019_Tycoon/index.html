@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>019_TYCOON | UTT-v2.0 MASTER-GRADE</title>
+    <meta name="description" content="商業大亨 旗艦版，展現 2026 數位經濟與資本擴張美學。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Corporate HUD -->
+        <header id="main-hud">
+            <div class="hud-left">
+                <h1 id="brand-title">CORP <span>TYCOON</span></h1>
+            </div>
+            <div class="hud-center">
+                <div class="metric-group">
+                    <span class="metric-label">淨資產</span>
+                    <span id="wealth-val" class="metric-value">$0</span>
+                </div>
+                <div class="metric-group">
+                    <span class="metric-label">被動收入</span>
+                    <span id="income-val" class="metric-value">+$0/sec</span>
+                </div>
+            </div>
+            <div class="hud-right">
+                <button id="auto-pilot-toggle" class="glow-control">🤖 AI 顧問</button>
+            </div>
+        </header>
+
+        <main id="business-map">
+            <div id="investment-grid">
+                <!-- Investments will be injected here -->
+            </div>
+            <canvas id="vfx-stage"></canvas>
+        </main>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>CAPITAL ASCENSION</h2>
+                <div class="divider"></div>
+                <p>建立你的商業帝國。從單一資產到跨國壟斷，實踐資本的力量。</p>
+                <button id="init-game-btn" class="primary-action">開始投資</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>030_PVZ_LITE | UTT-v2.0 MASTER-GRADE</title>
+    <meta name="description" content="植物大戰僵屍 簡約旗艦版，基於 UTT-v2.0 工業標準與 2026 戰術庭院美學。">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- 核心美學: Tactical Lawn HUD -->
+        <header id="main-hud">
+            <div class="hud-section hud-left">
+                <h1 id="brand-title">030_PVZ <span>LITE</span></h1>
+            </div>
+            
+            <div class="hud-section hud-center">
+                <div class="metric-group">
+                    <span class="metric-label">太陽能量</span>
+                    <span id="score-val" class="metric-value">000050</span>
+                </div>
+                <div class="metric-group">
+                    <span class="metric-label">波次進度</span>
+                    <span id="wave-display" class="metric-value">01 / 10</span>
+                </div>
+            </div>
+            
+            <div class="hud-section hud-right">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- 遊戲主畫布渲染容器 -->
+        <div id="canvas-wrapper">
+            <canvas id="stage"></canvas>
+        </div>
+
+        <!-- 狀態覆蓋層 (非阻塞 UI) -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2 id="overlay-heading">COURTYARD DEFENSE</h2>
+                <div class="divider"></div>
+                <p id="overlay-description">守護家園免受僵屍入侵。部署您的植物軍團，收集陽光資源。</p>
+                <button id="init-game-btn" class="primary-action">開始任務</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

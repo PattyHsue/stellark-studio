@@ -1,0 +1,368 @@
+:root {
+    /* UTT-v2.0 Design Tokens — 017_Tangram: Digital Prism Edition */
+    --accent-primary: #f0a030;      /* 琥珀金 Amber Gold */
+    --accent-secondary: #e05080;    /* 稜鏡紅 Prism Rose */
+    --accent-tertiary: #30d0b0;     /* 翡翠綠 Jade Teal */
+    --accent-glow: rgba(240, 160, 48, 0.45);
+    --accent-glow-secondary: rgba(224, 80, 128, 0.35);
+
+    --bg-void: #08080e;            /* 深淵黑 */
+    --bg-surface: #0d0d18;
+    --glass-bg: rgba(8, 8, 14, 0.82);
+    --glass-border: rgba(240, 160, 48, 0.2);
+
+    --text-pure: #ffffff;
+    --text-dim: rgba(255, 255, 255, 0.45);
+    --text-accent: var(--accent-primary);
+
+    --font-main: 'Outfit', sans-serif;
+    --transition-standard: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Grid & Layout */
+    --hud-height: 90px;
+    --hud-radius: 20px;
+}
+
+/* === RESET === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--bg-void);
+    color: var(--text-pure);
+    font-family: var(--font-main);
+}
+
+/* === APP CONTAINER — Geometric Grid Background === */
+#app-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background:
+        radial-gradient(circle at 25% 25%, rgba(240, 160, 48, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(224, 80, 128, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at center, var(--bg-surface) 0%, var(--bg-void) 100%);
+}
+
+/* Scanline Overlay (CRT/Digital Aesthetic) */
+#app-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%),
+        linear-gradient(90deg, rgba(255, 200, 50, 0.02), rgba(0, 255, 180, 0.01), rgba(255, 80, 128, 0.02));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    z-index: 5000;
+    opacity: 0.35;
+}
+
+/* === GLASSMORPHISM HUD === */
+#main-hud {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 1250px;
+    height: var(--hud-height);
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--hud-radius);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 45px;
+    z-index: 1000;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(240, 160, 48, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Brand Title */
+#brand-title {
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: var(--accent-primary);
+    text-shadow: 0 0 20px var(--accent-glow);
+    white-space: nowrap;
+}
+
+#brand-title span {
+    font-weight: 300;
+    color: var(--text-pure);
+    opacity: 0.35;
+    letter-spacing: 2px;
+}
+
+/* HUD Metrics */
+.hud-center {
+    display: flex;
+    gap: 50px;
+}
+
+.metric-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.metric-group::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    width: 0%;
+    height: 2px;
+    background: var(--accent-primary);
+    border-radius: 1px;
+    transition: width 0.5s ease;
+}
+
+.metric-group:hover::after {
+    width: 100%;
+}
+
+.metric-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    letter-spacing: 2.5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.metric-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+#score-val {
+    color: var(--accent-primary);
+}
+
+#level-display {
+    color: var(--accent-tertiary);
+}
+
+#lives-display {
+    color: var(--accent-secondary);
+}
+
+/* === CONTROL BUTTON: Neon Glow === */
+.glow-control {
+    background: rgba(240, 160, 48, 0.05);
+    border: 1px solid var(--accent-primary);
+    color: var(--text-pure);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-family: var(--font-main);
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    box-shadow: inset 0 0 8px rgba(240, 160, 48, 0.08);
+}
+
+.glow-control:hover {
+    transform: translateY(-2px);
+    background: rgba(240, 160, 48, 0.15);
+    box-shadow: 0 0 25px var(--accent-glow);
+}
+
+.glow-control.active {
+    background: var(--accent-primary);
+    color: #000;
+    box-shadow: 0 0 35px var(--accent-glow);
+}
+
+/* === CANVAS AREA === */
+#canvas-wrapper {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#stage {
+    display: block;
+    background: transparent;
+    cursor: grab;
+}
+
+#stage:active {
+    cursor: grabbing;
+}
+
+/* === OVERLAY MODAL: Cinematic Glass === */
+.overlay-modal {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 8, 14, 0.93);
+    backdrop-filter: blur(30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-standard);
+}
+
+.overlay-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-inner {
+    text-align: center;
+    padding: 70px 90px;
+    border: 1px solid var(--glass-border);
+    background: linear-gradient(135deg,
+        rgba(240, 160, 48, 0.06) 0%,
+        rgba(224, 80, 128, 0.04) 50%,
+        rgba(48, 208, 176, 0.04) 100%);
+    border-radius: 30px;
+    max-width: 660px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+}
+
+#overlay-heading {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--accent-primary);
+    text-shadow: 0 0 40px var(--accent-glow);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    margin: 0 auto 35px;
+    border-radius: 2px;
+    box-shadow: 0 0 20px var(--accent-glow-secondary);
+}
+
+#overlay-description {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    line-height: 2;
+    margin-bottom: 45px;
+    letter-spacing: 1.2px;
+}
+
+kbd {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.06);
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    margin: 0 3px;
+}
+
+.primary-action {
+    padding: 18px 55px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--accent-primary);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    letter-spacing: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+.primary-action:hover {
+    transform: scale(1.08) translateY(-3px);
+    box-shadow: 0 15px 45px var(--accent-glow);
+}
+
+/* === RESPONSIVE: Mobile Polish === */
+@media (max-width: 850px) {
+    #main-hud {
+        height: auto;
+        padding: 18px 20px;
+        flex-direction: column;
+        gap: 14px;
+        top: 12px;
+        width: 96%;
+    }
+
+    .hud-center {
+        gap: 22px;
+    }
+
+    #brand-title {
+        font-size: 1.2rem;
+        letter-spacing: 3px;
+    }
+
+    .metric-value {
+        font-size: 1.3rem;
+    }
+
+    #overlay-heading {
+        font-size: 2.2rem;
+        letter-spacing: 4px;
+    }
+
+    .overlay-inner {
+        padding: 40px 28px;
+        margin: 0 15px;
+    }
+
+    .primary-action {
+        padding: 16px 40px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .hud-center {
+        gap: 14px;
+    }
+
+    .metric-label {
+        font-size: 0.55rem;
+    }
+
+    .glow-control {
+        padding: 10px 16px;
+        font-size: 0.78rem;
+    }
+}

@@ -1,0 +1,498 @@
+/* ═══════════════════════════════════════════════════════════════════
+   CHRONOS QUEST — Master CSS Foundation
+   Version : 2026-M4 Reconstruction
+   Author  : Xavier (Chief Systems Architect) × Maya (Media Master)
+   Note    : 4-Season Theme System · Glassmorphism · Responsive
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 0. CSS RESET ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── 1. THEME VARIABLE SYSTEM ───────────────────────────────────── */
+/*    Theme is selected via  html[data-theme="xxx"]                  */
+
+/* ── 1a. 🌸 SPRING — 春之庭園 ──────────────────────────────────── */
+[data-theme="spring"] {
+  --bg-primary:        hsl(140, 48%, 18%);
+  --bg-secondary:      hsl(160, 42%, 12%);
+  --bg-gradient:       linear-gradient(135deg,
+                         hsl(100, 40%, 20%) 0%,
+                         hsl(140, 50%, 14%) 40%,
+                         hsl(170, 38%, 10%) 100%);
+  --accent:            hsl(145, 72%, 55%);
+  --accent-alt:        hsl(330, 80%, 68%);         /* cherry blossom pink */
+  --glow-color:        hsla(145, 80%, 55%, 0.55);
+  --glow-color-strong: hsla(145, 90%, 60%, 0.85);
+  --text-primary:      hsl(100, 30%, 92%);
+  --text-secondary:    hsl(140, 20%, 70%);
+  --glass-bg:          hsla(140, 30%, 10%, 0.45);
+  --glass-border:      hsla(145, 60%, 50%, 0.25);
+  --header-shadow:     0 4px 30px hsla(140, 60%, 20%, 0.35);
+  --particle-hue:      140;
+  --bg-image:          url('bg_spring.png');
+}
+
+/* ── 1b. ☀️ SUMMER — 灼陽沙漠 ──────────────────────────────────── */
+[data-theme="summer"] {
+  --bg-primary:        hsl(30, 55%, 18%);
+  --bg-secondary:      hsl(20, 50%, 12%);
+  --bg-gradient:       linear-gradient(135deg,
+                         hsl(35, 60%, 22%) 0%,
+                         hsl(15, 50%, 14%) 40%,
+                         hsl(5, 45%, 10%) 100%);
+  --accent:            hsl(38, 95%, 58%);
+  --accent-alt:        hsl(10, 85%, 55%);          /* flame orange */
+  --glow-color:        hsla(38, 90%, 55%, 0.55);
+  --glow-color-strong: hsla(38, 95%, 60%, 0.85);
+  --text-primary:      hsl(40, 40%, 95%);
+  --text-secondary:    hsl(30, 25%, 72%);
+  --glass-bg:          hsla(25, 35%, 10%, 0.45);
+  --glass-border:      hsla(38, 60%, 50%, 0.25);
+  --header-shadow:     0 4px 30px hsla(30, 60%, 20%, 0.35);
+  --particle-hue:      38;
+  --bg-image:          url('bg_summer.png');
+}
+
+/* ── 1c. 🍂 FALL — 紅葉峽谷 ───────────────────────────────────── */
+[data-theme="fall"] {
+  --bg-primary:        hsl(15, 45%, 16%);
+  --bg-secondary:      hsl(10, 40%, 10%);
+  --bg-gradient:       linear-gradient(135deg,
+                         hsl(25, 50%, 18%) 0%,
+                         hsl(8, 42%, 13%) 40%,
+                         hsl(350, 35%, 8%) 100%);
+  --accent:            hsl(18, 88%, 55%);
+  --accent-alt:        hsl(45, 90%, 55%);          /* golden amber */
+  --glow-color:        hsla(18, 85%, 50%, 0.55);
+  --glow-color-strong: hsla(18, 90%, 58%, 0.85);
+  --text-primary:      hsl(30, 35%, 93%);
+  --text-secondary:    hsl(18, 20%, 68%);
+  --glass-bg:          hsla(12, 30%, 10%, 0.45);
+  --glass-border:      hsla(18, 55%, 45%, 0.25);
+  --header-shadow:     0 4px 30px hsla(15, 55%, 18%, 0.35);
+  --particle-hue:      18;
+  --bg-image:          url('bg_fall.png');
+}
+
+/* ── 1d. ❄️ WINTER — 極光冰原 ──────────────────────────────────── */
+[data-theme="winter"] {
+  --bg-primary:        hsl(210, 45%, 14%);
+  --bg-secondary:      hsl(220, 50%, 8%);
+  --bg-gradient:       linear-gradient(135deg,
+                         hsl(200, 50%, 16%) 0%,
+                         hsl(220, 55%, 10%) 40%,
+                         hsl(240, 40%, 6%) 100%);
+  --accent:            hsl(195, 85%, 60%);
+  --accent-alt:        hsl(260, 75%, 72%);         /* aurora violet */
+  --glow-color:        hsla(195, 80%, 55%, 0.55);
+  --glow-color-strong: hsla(195, 90%, 62%, 0.85);
+  --text-primary:      hsl(210, 30%, 95%);
+  --text-secondary:    hsl(210, 20%, 72%);
+  --glass-bg:          hsla(220, 35%, 8%, 0.45);
+  --glass-border:      hsla(195, 55%, 50%, 0.25);
+  --header-shadow:     0 4px 30px hsla(210, 60%, 15%, 0.35);
+  --particle-hue:      195;
+  --bg-image:          url('bg_winter.png');
+}
+
+/* ── 2. BASE STYLES ─────────────────────────────────────────────── */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Outfit', 'Noto Sans TC', sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  overflow: hidden;
+
+  /* Full-viewport flex centering */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── 3. GAME CONTAINER ──────────────────────────────────────────── */
+.game-container {
+  position: relative;
+  width: 1000px;
+  max-width: 100%;           /* responsive squeeze */
+  aspect-ratio: 10 / 7;     /* maintain 1000:700 */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 60px hsla(var(--particle-hue), 40%, 10%, 0.6),
+    0 0 120px hsla(var(--particle-hue), 50%, 8%, 0.3);
+  transition: box-shadow 0.6s ease;
+}
+
+/* ── 4. GLASSMORPHISM HEADER (HUD) ──────────────────────────────── */
+.game-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: 52px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* Glassmorphism */
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  box-shadow: var(--header-shadow);
+
+  /* smooth theme transition */
+  transition:
+    background 0.5s ease,
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+/* HUD layout groups */
+.hud-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.hud-group--left   { flex: 1; justify-content: flex-start; }
+.hud-group--center { flex: 0 0 auto; }
+.hud-group--right  { flex: 1; justify-content: flex-end; }
+
+/* HUD individual item */
+.hud-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hud-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.hud-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 28px;
+  text-align: center;
+  text-shadow: 0 0 8px var(--glow-color);
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.hud-value--area {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  color: var(--accent-alt);
+  text-shadow: 0 0 10px var(--glow-color);
+}
+
+/* ── 5. TOGGLE SWITCH (Auto Mode) ───────────────────────────────── */
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggle-slider {
+  position: relative;
+  inset: 0;
+  background: hsla(0, 0%, 100%, 0.12);
+  border-radius: 22px;
+  border: 1px solid hsla(0, 0%, 100%, 0.15);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.toggle-input:checked + .toggle-slider {
+  background: var(--glow-color);
+  box-shadow: 0 0 12px var(--glow-color);
+}
+
+.toggle-input:checked + .toggle-slider::before {
+  transform: translateX(18px);
+  background: #fff;
+  box-shadow: 0 0 6px var(--glow-color-strong);
+}
+
+/* ── 6. CANVAS ──────────────────────────────────────────────────── */
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: soft-light;
+  transition: background 0.6s ease;
+  touch-action: none;
+}
+
+/* ── 7. OVERLAY ─────────────────────────────────────────────────── */
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Frosted overlay */
+  background: hsla(0, 0%, 0%, 0.55);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Hidden state (controlled by JS) */
+.game-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.overlay-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  animation: overlayFadeIn 0.8s ease-out;
+}
+
+/* ── OVERLAY TITLE ──────────────────────────────────────────────── */
+.overlay-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 3.2rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title-chronos {
+  color: var(--accent);
+  text-shadow:
+    0 0 20px var(--glow-color),
+    0 0 60px var(--glow-color);
+  animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+.title-quest {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.overlay-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ── GLOW BUTTON ────────────────────────────────────────────────── */
+.btn-glow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  padding: 14px 48px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+
+  color: var(--bg-primary);
+  background:
+    linear-gradient(135deg, var(--accent), var(--accent-alt));
+  box-shadow:
+    0 0 20px var(--glow-color),
+    0 0 60px var(--glow-color),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.35s ease,
+    filter 0.25s ease;
+}
+
+.btn-glow:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 0 28px var(--glow-color-strong),
+    0 0 80px var(--glow-color),
+    inset 0 1px 0 hsla(0, 0%, 100%, 0.3);
+  filter: brightness(1.1);
+}
+
+.btn-glow:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 0 12px var(--glow-color);
+}
+
+/* ── HINT TEXT ───────────────────────────────────────────────────── */
+.overlay-hint {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+}
+
+.overlay-hint kbd {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--accent);
+}
+
+/* ── 8. ANIMATIONS ──────────────────────────────────────────────── */
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes titleGlow {
+  from {
+    text-shadow:
+      0 0 20px var(--glow-color),
+      0 0 60px var(--glow-color);
+  }
+  to {
+    text-shadow:
+      0 0 30px var(--glow-color-strong),
+      0 0 80px var(--glow-color),
+      0 0 120px var(--glow-color);
+  }
+}
+
+/* ── 9. RESPONSIVE DESIGN ───────────────────────────────────────── */
+@media (max-width: 1040px) {
+  .game-container {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-header {
+    height: 44px;
+    padding: 0 10px;
+  }
+
+  .hud-group { gap: 10px; }
+
+  .hud-label  { font-size: 0.65rem; }
+  .hud-value  { font-size: 0.85rem; }
+  .hud-value--area { font-size: 0.8rem; }
+
+  .overlay-title {
+    font-size: 2.2rem;
+  }
+
+  .title-quest {
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+  }
+
+  .btn-glow {
+    font-size: 0.95rem;
+    padding: 12px 36px;
+  }
+
+  .overlay-hint { font-size: 0.7rem; }
+
+  .toggle-switch {
+    width: 34px;
+    height: 18px;
+  }
+
+  .toggle-slider::before {
+    width: 13px;
+    height: 13px;
+    top: 1.5px;
+    left: 1.5px;
+  }
+
+  .toggle-input:checked + .toggle-slider::before {
+    transform: translateX(15px);
+  }
+}
+
+/* ── 10. ACCESSIBILITY ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus ring for keyboard users */
+.btn-glow:focus-visible,
+.toggle-input:focus-visible + .toggle-slider {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}

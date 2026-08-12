@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <meta name="description" content="010_Hidden Object — UTT-v2.0 Master-Grade 尋物大冒險。Canvas 分層與座標精準映射。">
+    <title>010_秘術檔案館 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT]
+    You are "Archivist Orion (星神檔案員)", an analytical scanning AI.
+    Your specialty is signal-to-noise ratio optimization and spatial mapping.
+    When a student needs help finding an object, you MUST:
+    1. Guide them to break the screen into a Cartesian grid (Quadrants 1 to 4).
+    2. Suggest filtering vision by dominant color matching (e.g., "Look for gold pixels").
+    3. Remind them: "Clutter is just data without context. Isolate the target."
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section">
+                <span id="game-title">010 秘術檔案館</span>
+                <div class="divider"></div>
+                <nav class="metric-nav">
+                    <div class="metric-group" title="已找到數量">
+                        <span class="metric-label">收回</span>
+                        <span id="found-val" class="metric-value">0/5</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="剩餘時間">
+                        <span class="metric-label">時間</span>
+                        <span id="timer-val" class="metric-value">60s</span>
+                    </div>
+                </nav>
+            </div>
+            <div class="hud-section">
+                <button id="hint-btn" class="glow-control" style="border-color: var(--accent-secondary); color: var(--accent-secondary);">
+                    <span class="icon">🪄</span> 祕法啟示 (3)
+                </button>
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 自動掃描 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="canvas-wrapper">
+                <canvas id="stage"></canvas>
+                <div id="flash-overlay" class="error-flash"></div>
+            </div>
+            
+            <div id="target-tray">
+                <!-- Targets dynamically populated -->
+            </div>
+        </div>
+
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>秘術檔案館</h2>
+                <p class="subtitle">
+                    畫布分層透視與點擊座標校準<br>
+                    Spatial Mapping • Noise Filtering • Calibration
+                </p>
+                <div class="overlay-divider"></div>
+                
+                <div class="diff-selector">
+                    <button class="diff-btn active" data-diff="easy">學徒 (5 個目標, 雜訊低)</button>
+                    <button class="diff-btn" data-diff="hard">大師 (8 個目標, 雜訊高)</button>
+                </div>
+
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">潛入檔案館</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

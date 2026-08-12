@@ -1,0 +1,120 @@
+/* ============================================================
+   022_MINESWEEPER | 掃雷英雄 (戰術雷達)
+   Theme: Tactical Radar
+   UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+   ============================================================ */
+
+:root {
+    --bg-deep: #020617;
+    --bg-surface: #0f172a;
+    --accent-primary: #10b981;
+    --accent-glow: #34d399;
+    --accent-secondary: #0ea5e9;
+    --accent-danger: #ef4444;
+    --accent-warning: #f59e0b;
+    --glass-bg: rgba(15, 23, 42, 0.75);
+    --glass-border: rgba(16, 185, 129, 0.2);
+    --text-pure: #f8fafc;
+    --text-muted: #94a3b8;
+    --hud-h: 64px;
+    --font-main: 'Outfit', 'Noto Sans TC', sans-serif;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --transition-fast: 0.2s ease;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    font-family: var(--font-main);
+    background: var(--bg-deep); color: var(--text-pure);
+    user-select: none; -webkit-user-select: none;
+}
+
+#app-container {
+    width: 100%; height: 100%; display: flex; flex-direction: column;
+    background:
+        linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px),
+        var(--bg-deep);
+    background-size: 40px 40px;
+}
+
+/* === HUD === */
+#hud-bar {
+    height: var(--hud-h); display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; background: var(--glass-bg); backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border); z-index: 10;
+}
+.hud-section { display: flex; align-items: center; gap: 16px; }
+#game-title {
+    font-size: 0.95rem; font-weight: 800; letter-spacing: 4px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.divider { width: 1px; height: 24px; background: var(--glass-border); margin: 0 8px; }
+.metric-nav { display: flex; gap: 20px; }
+.metric-group { display: flex; flex-direction: column; align-items: center; min-width: 60px; }
+.metric-label { font-size: 0.55rem; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; }
+.metric-value { font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
+.metric-value.danger { color: var(--accent-danger); animation: pulse-danger 1s infinite alternate; }
+
+@keyframes pulse-danger { from{opacity:1;} to{opacity:0.5; text-shadow:0 0 10px var(--accent-danger);} }
+
+.glow-control {
+    background: transparent; border: 1px solid var(--accent-primary);
+    color: var(--accent-primary); padding: 8px 18px; border-radius: 30px;
+    font-family: var(--font-main); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 1px; cursor: pointer; transition: all var(--transition-fast);
+    display: flex; align-items: center; gap: 6px;
+}
+.glow-control:hover { background: rgba(16, 185, 129, 0.15); box-shadow: 0 0 15px rgba(16, 185, 129, 0.3); }
+.glow-control.active { background: var(--accent-primary); color: #fff; box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); }
+
+/* === GAME STAGE === */
+#game-area { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; padding: 20px; }
+#canvas-wrapper {
+    position: relative; border-radius: var(--radius-md); overflow: hidden;
+    box-shadow: 0 0 50px rgba(16, 185, 129, 0.1); border: 1px solid var(--glass-border);
+}
+#stage { display: block; background: #080f1e; cursor: default; }
+
+/* === OVERLAYS === */
+.overlay-modal {
+    position: fixed; inset: 0; display: flex; justify-content: center; align-items: center;
+    background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(20px);
+    z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+}
+.overlay-modal.active { opacity: 1; pointer-events: all; }
+
+.overlay-inner {
+    text-align: center; max-width: 480px; padding: 50px;
+    border: 1px solid var(--glass-border); border-radius: var(--radius-lg); background: var(--glass-bg);
+}
+.overlay-inner h2 {
+    font-size: 2.5rem; font-weight: 800; letter-spacing: 6px; margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.overlay-inner h2.lose-text {
+    background: linear-gradient(135deg, var(--accent-danger), var(--accent-warning));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.overlay-inner .subtitle { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+.overlay-divider { width: 60px; height: 3px; margin: 20px auto; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent); }
+
+.diff-selector { display: flex; justify-content: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+.diff-btn {
+    background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted);
+    padding: 8px 16px; border-radius: 25px; font-family: var(--font-main); font-size: 0.8rem;
+    cursor: pointer; transition: all 0.2s;
+}
+.diff-btn.active { background: var(--accent-primary); border-color: var(--accent-primary); color: #fff; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4); }
+
+.overlay-btn {
+    padding: 16px 50px; font-family: var(--font-main); font-size: 1rem; font-weight: 700;
+    letter-spacing: 3px; color: #fff; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border: none; border-radius: 35px; cursor: pointer; transition: all 0.2s;
+}
+.overlay-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.5); }

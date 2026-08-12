@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="006_GeoGuessr — UTT-v2.0 Master-Grade 世界探險。地圖座標偏差計算與地理知識挑戰的旗艦級探險遊戲。">
+    <title>006_世界探險 | UTT-v2.0 MASTER-GRADE ENGINE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--
+    =======================================================================
+    UTT-v2.0 | Digital Twin Role-Play Prompt (Tessa's Lab Design)
+    =======================================================================
+    [SYSTEM PROMPT — FOR AI COMPANION INITIALIZATION]
+    You are "Navigator Atlas (地圖旅人)", a passionate geography mentor AI.
+    Your specialty is world geography, cultural landmarks, and cartography.
+    When a student asks about a location, you MUST:
+    1. Describe the geographic features (climate, terrain, coordinates).
+    2. Share cultural and historical context of the region.
+    3. Explain map projection concepts (Mercator distortion, etc.).
+    4. Always encourage: "每一次猜測都是一次環遊世界的旅程！"
+    =======================================================================
+    -->
+
+    <div id="app-container">
+        <header id="hud-bar">
+            <div class="hud-section hud-left">
+                <span id="game-title">006 世界探險</span>
+                <div class="divider"></div>
+                <nav class="metric-nav">
+                    <div class="metric-group" title="總分">
+                        <span class="metric-label">總分</span>
+                        <span id="score-val" class="metric-value">000000</span>
+                    </div>
+                    <div class="metric-group" title="當前回合">
+                        <span class="metric-label">回合</span>
+                        <span id="round-val" class="metric-value">1/5</span>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="metric-group" title="剩餘時間">
+                        <span class="metric-label">時間</span>
+                        <span id="timer-val" class="metric-value">00:30</span>
+                    </div>
+                </nav>
+            </div>
+            <div class="hud-section hud-right">
+                <button id="auto-pilot-toggle" class="glow-control">
+                    <span class="icon">🤖</span> 自動 <span id="auto-pilot-status">OFF</span>
+                </button>
+            </div>
+        </header>
+
+        <div id="game-area">
+            <div id="map-container">
+                <canvas id="map-canvas"></canvas>
+            </div>
+
+            <div id="clue-panel">
+                <div id="clue-header">
+                    <h4>🧭 地點線索</h4>
+                    <span id="round-indicator">第 1 回合 / 共 5 回合</span>
+                </div>
+                <div id="clue-content">
+                    <div id="clue-emoji">🌍</div>
+                    <div id="clue-text">點擊「開始探險」以啟動任務。</div>
+                    <div id="clue-hints"></div>
+                </div>
+                <div id="clue-actions">
+                    <button id="confirm-btn" disabled>確認猜測</button>
+                </div>
+            </div>
+
+            <div id="result-panel">
+                <div class="result-info">
+                    <div>
+                        <div class="result-distance" id="result-distance">0 km</div>
+                        <div class="result-location" id="result-location">--</div>
+                    </div>
+                    <div class="result-points" id="result-points">+0 分</div>
+                </div>
+                <button id="next-btn">下一題 →</button>
+            </div>
+        </div>
+
+        <!-- Ad Overlay -->
+        <div id="ad-overlay" class="overlay-modal">
+            <div class="overlay-inner" style="max-width:450px; border-color: var(--accent-tertiary);">
+                <h3 style="color: var(--accent-tertiary); margin-bottom:10px; letter-spacing:2px">📺 旅遊贊助商</h3>
+                <div class="overlay-divider" style="background:var(--accent-tertiary)"></div>
+                <div style="height:150px; background:rgba(255,255,255,0.05); border-radius:15px; display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:20px">
+                    <span style="font-size:3rem; margin-bottom:10px">✈️</span>
+                    <p style="opacity:0.6; font-size:0.85rem">加載旅遊頻道中...</p>
+                </div>
+                <p id="ad-timer" style="font-size:1.5rem; font-weight:700; margin-bottom:20px">5 秒後關閉</p>
+            </div>
+        </div>
+
+        <!-- State Overlay -->
+        <div id="game-overlay" class="overlay-modal active">
+            <div class="overlay-inner">
+                <h2>世界探險</h2>
+                <p class="subtitle">
+                    地圖座標偏差計算與地理知識挑戰<br>
+                    Explore • Guess • Discover
+                </p>
+                <div class="overlay-divider"></div>
+                <p class="subtitle" style="font-size:0.7rem; opacity:0.4; margin-bottom:18px">
+                    UTT-v2.0 MASTER-GRADE ENGINE | © 2026 Project Chimera
+                </p>
+                <button id="init-game-btn" class="overlay-btn">開始探險</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

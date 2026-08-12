@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mechanical Chronos | Nano Banana 典藏</title>
+    <meta name="description" content="探索微觀工藝的極致——古典浪漫機械表沉浸式展示">
+    <link rel="stylesheet" href="watch_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Outfit:wght@200;300;400;600&family=Space+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loader">
+        <div class="nano-loader">
+            <div class="loader-circle"></div>
+            <div class="loader-text">NANO CHRONOS</div>
+            <div class="loader-progress" id="loader-progress"></div>
+        </div>
+    </div>
+
+    <div class="ambient-glow" id="ambient-glow"></div>
+
+    <nav class="nano-nav">
+        <div class="nav-logo">CHRONOS.01</div>
+        <div class="nav-links">
+            <a href="../index.html">← GALLERY</a>
+            <a href="#act1">STRUCTURE</a>
+            <a href="#act2">MOVEMENT</a>
+            <button class="nav-order">PRE-ORDER</button>
+        </div>
+    </nav>
+
+    <!-- Act I: Exploded Structure -->
+    <section class="act" id="act1">
+        <div class="canvas-container">
+            <canvas id="watch-canvas"></canvas>
+            <!-- Poster Placeholder if no frames -->
+            <img src="../nano_banana_watch_hero_1776250744263.png" class="hero-poster" id="hero-poster">
+        </div>
+        
+        <div class="scroll-trigger" style="height: 300vh;">
+            <div class="label-layer">
+                <div class="nano-label top-left" data-scroll="0.1">
+                    <span class="code">NANO-01</span>
+                    <h3>904L 精鋼錶殼</h3>
+                    <p>經過三千次手工拋光，呈現如鏡面般的深邃質感。</p>
+                </div>
+                <div class="nano-label mid-right" data-scroll="0.4">
+                    <span class="code">NANO-02</span>
+                    <h3>蕉金齒輪組</h3>
+                    <p>Nano Banana 特製合金，摩擦係數降低 40%，動力儲存達 72 小時。</p>
+                </div>
+                <div class="nano-label bottom-left" data-scroll="0.7">
+                    <span class="code">NANO-03</span>
+                    <h3>微米級蝕刻</h3>
+                    <p>錶盤上的每一道紋路僅需 5 微米，肉眼難辨的極致精度。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="transition-divider">
+        <div class="divider-line"></div>
+        <div class="divider-text">觸碰機械的核心</div>
+    </div>
+
+    <!-- Act II: The Heartbeat (Classical Romantic Mechanical Watch) -->
+    <section class="act act-sticky-video" id="act2">
+        <div class="sticky-wrapper">
+            <div class="video-container" id="video-stage">
+                <div class="video-zoom-wrapper">
+                    <video id="watch-video" muted loop playsinline poster="../nano_banana_watch_hero_1776250744263.png">
+                        <source src="./assets/WatchRun.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="glass-overlay">
+                    <div class="dashboard">
+                        <div class="stat">
+                            <label>VIBRATION</label>
+                            <span class="value">28,800 VPH</span>
+                        </div>
+                        <div class="stat">
+                            <label>PRECISION</label>
+                            <span class="value">±1 SEC/DAY</span>
+                        </div>
+                        <div class="stat">
+                            <label>TEMP</label>
+                            <span class="value">22.5°C</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-overlay">
+                <div class="glass-card">
+                    <span class="category">ACT II — 靈魂</span>
+                    <h2>古典浪漫機械表：引力的反叛</h2>
+                    <p>這不是簡單的計時工具，而是在方寸之間對抗萬有引力的壯舉。蕉金色的旋轉架每分鐘旋轉一圈，抵消方位誤差，確保每一秒的純粹。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Section: Heritage (About Us) -->
+    <section class="info-section" id="heritage">
+        <div class="glow-sphere"></div>
+        <div class="info-content">
+            <span class="nano-tag">HERITAGE</span>
+            <h2>超越時間的蕉金哲學</h2>
+            <p>在 Nano Banana 的實驗室中，我們不相信時間是線性的。我們認為每一秒都是一次精密的爆炸，一場齒輪與律動的協奏。Mechanical Chronos 誕生於對極致純粹的追求，將航太級 904L 精鋼與獨家專利「蕉金」合金融合，創造出這件跨越世紀的藝術品。</p>
+            <div class="signature">Master Artisan — Xavier Hsu</div>
+        </div>
+    </section>
+
+    <!-- New Section: Product Intro (Visual Grid) -->
+    <section class="specs-section" id="specs">
+        <div class="specs-grid">
+            <div class="spec-card">
+                <div class="spec-icon">🧪</div>
+                <h4>航太級合金</h4>
+                <p>904L 精鋼中注入錸元素，提升 40% 耐蝕性。</p>
+            </div>
+            <div class="spec-card highlight">
+                <div class="spec-icon">🍌</div>
+                <h4>Nano Banana 塗層</h4>
+                <p>微米級金離子真空氣相沉積，呈現獨一無二的暖金色澤。</p>
+            </div>
+            <div class="spec-card">
+                <div class="spec-icon">🌓</div>
+                <h4>雙面藍寶石</h4>
+                <p>厚度僅 1.2mm，卻具備莫氏硬度 9 級的極致防護。</p>
+            </div>
+            <div class="spec-card">
+                <div class="spec-icon">⚡</div>
+                <h4>高頻律動</h4>
+                <p>28,800 次/小時的震頻，確保分秒不差的浪漫。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Section: Full-Bleed Macro (Merged with Background) -->
+    <section class="macro-showcase">
+        <div class="macro-bg">
+            <img src="./assets/WatchMacro.png" alt="Watch Macro Detail">
+            <div class="macro-overlay"></div>
+        </div>
+        <div class="macro-text">
+            <h2>看不見的，才是靈魂所在</h2>
+            <p>每一顆紅寶石軸承都經過人工挑選，確保在顯微鏡下亦無瑕疵。</p>
+        </div>
+    </section>
+
+    <!-- New Section: Pricing (The Collection) -->
+    <section class="pricing-section" id="pricing">
+        <h2 class="section-title">THE COLLECTION</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <span class="edition">LTD. EDITION</span>
+                <h3>Heritage Gold</h3>
+                <div class="price">$42,000</div>
+                <ul>
+                    <li>編號限量 50 枚</li>
+                    <li>Nano-Banana 實金擺輪</li>
+                    <li>終身免維護服務</li>
+                </ul>
+                <button class="buy-btn">REQUEST ACCESS</button>
+            </div>
+            <div class="price-card featured">
+                <span class="edition">MOST SELECT</span>
+                <h3>Midnight Chronos</h3>
+                <div class="price">$38,500</div>
+                <ul>
+                    <li>霧面黑 DLC 處理</li>
+                    <li>蕉金指針噴寫</li>
+                    <li>兩組特製皮帶</li>
+                </ul>
+                <button class="buy-btn">PURCHASE NOW</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="nano-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="f-logo">CHRONOS</div>
+                <p>時光的定義者。我們不僅製造手錶，我們在捕捉宇宙規律的迴響。</p>
+            </div>
+            <div class="footer-col">
+                <h4>規格與導覽</h4>
+                <ul>
+                    <li><a href="../index.html">返回中央大廳</a></li>
+                    <li><a href="#act1" style="color: #666; text-decoration: none;">機械結構</a></li>
+                    <li><a href="#act2" style="color: #666; text-decoration: none;">動力心臟</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>聯絡我們</h4>
+                <p>Global Center: Hsinchu, TW</p>
+                <p>Email: lux@nano-banana.luxury</p>
+            </div>
+        </div>
+        <div class="copy">© 2026 NANO BANANA SERIES. PROUDLY DESIGNED BY UTT V2.0.</div>
+    </footer>
+
+    <script src="watch_app.js"></script>
+</body>
+</html>
