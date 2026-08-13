@@ -15,7 +15,7 @@
 歡迎來到 **Stellark AI x Life Studio (星月工作室)** 的官方數位作品集。
 這裡是 Master-Grade 頂級數位美學與前沿 AI 技術交會的所在。
 
-🔗 **[點此瀏覽官方網站 (Live Website)](https://stellark-ai-studio.netlify.app/)**
+🔗 **[點此瀏覽官方網站 (Live Website)](https://stellark-ailife-studio.netlify.app/)**
 
 ### ✨ 關於工作室
 
@@ -42,7 +42,7 @@ Stellark Studio 致力於將複雜的 AI 概念與數位工程，轉化為沉浸
 
 對數位專案合作有興趣，或是想探索 AI 教育解決方案嗎？
 - **負責人**: Patty Hsu
-- **官方網站**: [Stellark Studio](https://stellark-ai-studio.netlify.app/)
+- **官方網站**: [Stellark Studio](https://stellark-ailife-studio.netlify.app/)
 
 <br>
 <hr>
@@ -53,7 +53,7 @@ Stellark Studio 致力於將複雜的 AI 概念與數位工程，轉化為沉浸
 Welcome to the official digital portfolio of **Stellark AI x Life Studio**. 
 Where Master-Grade digital aesthetics meet cutting-edge AI technology.
 
-🔗 **[View Live Website](https://stellark-ai-studio.netlify.app/)**
+🔗 **[View Live Website](https://stellark-ailife-studio.netlify.app/)**
 
 ### ✨ About the Studio
 
@@ -80,7 +80,7 @@ This portfolio is built with a focus on high performance and zero-dependency nat
 
 Interested in collaborating on a digital project or exploring AI educational solutions?
 - **Author**: Patty Hsu
-- **Website**: [Stellark Studio](https://stellark-ai-studio.netlify.app/)
+- **Website**: [Stellark Studio](https://stellark-ailife-studio.netlify.app/)
 
 ---
 *Forged with precision. Designed with passion.*
